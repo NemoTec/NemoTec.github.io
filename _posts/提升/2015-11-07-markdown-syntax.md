@@ -130,9 +130,9 @@ description: 这篇是个人学习Markdown语法技巧时的总结，用纯文�
     :------: 为居中对齐;  
     ------- 为使用默认居中对齐】  
 【效果】【】  
-| 我的笔记|  特性 |   结果  |
-|:---------:|-----------:|--------|
-| MyNote 123 | Markdown| OK--------- |
+|| *我的笔记* ||  *特性* ||   *结果*  ||
+||:---------:||-----------:||--------||
+|| MyNote 123 || Markdown || OK--------- ||
 
 <br/>
 
@@ -160,14 +160,17 @@ xx/yy/zz.jpg为图片所在路径;
 YourGithub/Project/blob/master/Res/ActivityCallBack.png，用Markdown添加图片语法，但是需要注意的是链接中需将blob改为raw。**】  
 
 (1) 内联方式:  
+
 ![image](http://mdp.tylingsoft.com/icon.png "PNG")  
 
 (2) 引用方式:  
+
 ![alt text][id4]
 
 [id4]: http://mdp.tylingsoft.com/icon.png "Title"
 
-(3) GitHub图片用法：
+(3) GitHub图片用法:  
+
 ![alt text](https://github.com/NemoTec/Picture/raw/master/NotePic/markdown/ActivityCallBack.png)
 
 <br/>
