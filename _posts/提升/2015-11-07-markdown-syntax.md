@@ -7,9 +7,11 @@ keywords: Markdown
 description: 这篇是个人学习Markdown语法技巧时的总结，用纯文本编辑打开就可以看到各示例内容的Markdown语法实现，基本可以解决最常用的Markdown编辑方法中90%的问题，更深入的研究会在学习后持续更新。
 ---
 注：转载请注明来自Nemo, http://nemotec.github.io  
+<br/>  
+<br/>  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这篇是个人学习Markdown语法技巧时的总结，用纯文本编辑打开就可以看到各示例内容的Markdown语法实现，基本可以解决最常用的Markdown编辑方法中90%的问题，更深入的研究会在学习后持续更新。  
-
+<br/>  
 
 #### 一、标题  
 【语法】【类Atx形式: 行首1-6个#, 再加1-N个空格, 再加标题。(标题后+N个空格+N个#可有可无)】  
@@ -28,12 +30,12 @@ description: 这篇是个人学习Markdown语法技巧时的总结，用纯文�
 <br/>
 
 #### 二、粗体
-【语法】【在文字前后各加**或__】 或 【快捷键Ctrl+B?】  
+【语法】【在文字前后各加\*\*或\_\_】  
 【效果】【**这段文字会变粗体1** 或 __这段文字会变粗体2__】  
 <br/>
 
 #### 三、斜体
-【语法】【在文字前后各加*或_】或【快捷键Ctrl+I?】  
+【语法】【在文字前后各加\*或\_】
 【效果】【*文字变斜体1* 或 _文字变斜体2_】【~~删除线~~】【++下划线++】【~这是什么~】  
 <br/>
 
@@ -45,7 +47,7 @@ description: 这篇是个人学习Markdown语法技巧时的总结，用纯文�
 #### 五、空格
 【语法】【\&nbsp;】  
 【效果】【一个空格】  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中文行的开关一般都有两个中文字符的空格。中文行的开关一般都有两个中文字符的空格。中文行的开关一般都有两个中文字符的空格。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中文行的开关一般都有两个中文字符的空格。中文行的开关一般都有两个中文字符的空格。中文行的开关一般都有两个中文字符的空格。  
 <br/>
 
 #### 六、有序列表
@@ -148,7 +150,7 @@ I get 10 times more traffic from [Google][1] than from [Yahoo][2] or [MSN][3].
 
 
 #### 十一、图片
-【语法】【\!\[Alt text\](xx/yy/zz.jpg "Optional title") 】  
+【语法】【\!\[Alt text\](xx/yy/zz.jpg "Optional title")】  
 【效果】【Alt text 为如果图片无法显示时显示的文字;  
 xx/yy/zz.jpg为图片所在路径;  
 Optional title 为显示标题。显示效果为在你将鼠标放到图片上后，会显示一个提示框。  
@@ -169,8 +171,8 @@ YourGithub/Project/blob/master/Res/ActivityCallBack.png,
 <br/>
 
 #### 十二、代码块
-【语法】【使用```表示代码块。2个顿点表示行内代码，有的1个或3个也可表示行内代码】  
-【效果】【`是英文下的TAB键上方的键，下例中的javascript可以不写。】
+【语法】【使用\`\`\`表示代码块。2个顿点表示行内代码，有的1个或3个也可表示行内代码】  
+【效果】【\`是英文下的TAB键上方的键，下例中的javascript可以不写。】
 ```javascript
 
 var canvas = document.getElementById("canvas");
@@ -210,6 +212,7 @@ A-->B
 #### 十六、分隔线
 【语法】【3个及以上\* 或 -, 或3个以上 * + 空格】  
 【效果】【】  
+----------
 第一行
 ----------
 第二行
