@@ -173,7 +173,8 @@ YourGithub/Project/blob/master/Res/ActivityCallBack.png,
 #### 十二、代码块
 【语法】【使用\`\`\`表示代码块。2个顿点表示行内代码，有的1个或3个也可表示行内代码】  
 【效果】【\`是英文下的TAB键上方的键，下例中的javascript可以不写。】  
-```
+
+```  
 javascript
 
 var canvas = document.getElementById("canvas");
@@ -182,19 +183,18 @@ if (isOpen) {
 }
 var context = canvas.getContext("2d");
 
-```
-这是``java.lang.String``类的实例。行内代码`ClassLoader`, ```reflect```.
+```  
+这是``java.lang.String``类的实例。行内代码`ClassLoader`, ```reflect```.  
 <br/>
 
 #### 十三、流程图
 【语法】【】  
 【效果】【】  
 
-``` 
-graph LR
+\`\`\` 
+graph LR  
 A-->B
-```
-
+\`\`\`  
 <br/>
 
 <span id = "jumpTo">页内跳转会跳到这吗</span>  
