@@ -151,15 +151,17 @@ I get 10 times more traffic from [Google][1] than from [Yahoo][2] or [MSN][3].
 
 #### 十一、图片
 【语法】【\!\[Alt text\](xx/yy/zz.jpg "Optional title")】  
-【效果】【Alt text 为如果图片无法显示时显示的文字;  
+【效果】【  
+Alt text 为如果图片无法显示时显示的文字;  
 xx/yy/zz.jpg为图片所在路径;  
-Optional title 为显示标题。显示效果为在你将鼠标放到图片上后，会显示一个提示框。  
-图片路径可以使用绝对路径也可以使用相对路径，建议使用相对路径。通常的做法是Markdown文档的同级目录下建立一个pictures文件夹，里面放置所有所需的图片。  
-**GitHub图片用法: 找到repo中图片，点击图片可获得路径，如
-YourGithub/Project/blob/master/Res/ActivityCallBack.png, 
-用Markdown添加图片语法，但是需要注意的是链接中需将blob改为raw。**】  
+(1) Optional title 为显示标题。显示效果为在你将鼠标放到图片上后，会显示一个提示框。  
+(2) 图片路径可以使用绝对路径也可以使用相对路径，建议使用相对路径。通常的做法是Markdown文档的同级目录下建立一个pictures文件夹，里面放置所有所需的图片。  
+(3) **GitHub图片用法: 找到repo中图片，点击图片可获得路径，如
+YourGithub/Project/blob/master/Res/ActivityCallBack.png，用Markdown添加图片语法，但是需要注意的是链接中需将blob改为raw。**】  
+
 (1) 内联方式:  
 ![image](http://mdp.tylingsoft.com/icon.png "PNG")  
+
 (2) 引用方式:  
 ![alt text][id4]
 
@@ -191,10 +193,10 @@ var context = canvas.getContext("2d");
 【语法】【】  
 【效果】【】  
 
-\`\`\` 
+```  
 graph LR  
 A-->B
-\`\`\`  
+```  
 <br/>
 
 <span id = "jumpTo">页内跳转会跳到这吗</span>  
