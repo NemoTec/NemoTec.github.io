@@ -172,8 +172,9 @@ YourGithub/Project/blob/master/Res/ActivityCallBack.png,
 
 #### 十二、代码块
 【语法】【使用\`\`\`表示代码块。2个顿点表示行内代码，有的1个或3个也可表示行内代码】  
-【效果】【\`是英文下的TAB键上方的键，下例中的javascript可以不写。】
-```javascript
+【效果】【\`是英文下的TAB键上方的键，下例中的javascript可以不写。】  
+```
+javascript
 
 var canvas = document.getElementById("canvas");
 if (isOpen) {
@@ -210,9 +211,9 @@ A-->B
 <br/>
 
 #### 十六、分隔线
-【语法】【3个及以上\* 或 -, 或3个以上 * + 空格】  
+【语法】【3个及以上\* 或 \-, 或3个以上\* 加 1个空格】  
 【效果】【】  
-----------
+
 第一行
 ----------
 第二行
