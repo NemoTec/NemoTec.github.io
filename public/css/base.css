@@ -3,30 +3,35 @@
   width: 100%;
   height: 100%;
 }
+
 body, html {
   margin: 0px;
   height: 100%;
   overflow: hidden; 
-  background-color: #d3d3d3;
+  background-color: #303030;
 }
+
 .row {
   height: 100%;
 }
+
 /* 导航栏 + 目录栏 */
 .aside {
   height: 100%;
 }
+
 /* 左侧导航栏 */
 .aside1 {
-  /*background-color: #1f2c39;*/
   background-color: #1abc9c;
   /*background-image: url(/public/img/bg_grid.jpg);*/
+  
   height: 100%;
   padding-left: 0px;
   padding-right: 0px;
   text-align: center;
   /*box-shadow: inset -15px 0 20px -15px #77AEF4;*/
 }
+
 .aside1 > .nav > li > a {
   padding-left: 0px;
   padding-right: 0px;
@@ -34,7 +39,6 @@ body, html {
   color: #fff;
   font-size: 15px;
   padding: 10px 10px;
-
 }
 
 .aside1> .nav > li > a:hover {
@@ -44,7 +48,6 @@ body, html {
 
 .aside1 > .nav-pills>li.active>a ,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus {
   color: #fff;
-  /*background-color: #fafaf6;*/
   /*background-image: url(/public/img/body_bg.jpg);*/
   background-color: #303030;
 }
@@ -54,23 +57,25 @@ body, html {
   /*height: 90px;*/
   border: 0px solid #fff;
 }
+
 .aside1_bottom {
   width: 100%;
   position: absolute;
   bottom: 0px;
   left: 0px;
 }
+
 .aside1_bottom > .table {
   margin-bottom: 0px;
 }
+
 /* 中部目录栏 */
 .aside2 {
-  /*background-color: #fafaf6;*/
   /*background-image: url(/public/img/body_bg.jpg);*/
-
   background-color: #303030;
   height: 100%;
   border-right: 2px solid #303030;
+  border-left: 2px solid #303030;
   overflow-y: auto;
   font-color: #fff;
   margin-top: 40px;
@@ -82,9 +87,8 @@ body, html {
   overflow-y: auto;
   background-color: #fff;
   overflow-x: hidden;
-
-  /*background-image: url(/public/img/bg_lines1.jpg);*/
 }
+
 .aside3-title {
   background-color: #f5f5f5;
   /*background-image: url(/public/img/bg_grid.jpg);*/
@@ -94,6 +98,7 @@ body, html {
   text-align: center;
   color: #303030;
 }
+
 .aside3-content {
 /*  padding-left: 40px;
   padding-right: 40px;
@@ -111,14 +116,17 @@ body, html {
 blockquote p {
   font-size: 20px;
 }
+
 /* 其他配置 */
 .center {
   text-align: center;
 }
+
 .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
   color: #fff;
   background-color: #303030;
 }
+
 /* 显示评论按钮 */
 .show-commend {
   width: 100%;
