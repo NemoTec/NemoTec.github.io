@@ -68,7 +68,7 @@ body, html {
   /*background-color: #fafaf6;*/
   /*background-image: url(/public/img/body_bg.jpg);*/
 
-  background-color: #0000a0;
+  background-color: #303030;
   height: 100%;
   border-right: 2px solid #303030;
   overflow-y: auto;
@@ -103,7 +103,7 @@ body, html {
   line-height: 1.42857143;
 }
 #content {
-  font-size: 18px;
+  font-size: 16px;
 }
 #content h2, h3 {
   line-height: 2;
