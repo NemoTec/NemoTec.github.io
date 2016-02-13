@@ -74,11 +74,11 @@ body, html {
   /*background-image: url(/public/img/body_bg.jpg);*/
   background-color: #303030;
   height: 100%;
-  border-right: 2px solid #303030;
-  border-left: 2px solid #303030;
+  border-right: 0px solid #303030;
+  border-left: 0px solid #303030;
   overflow-y: auto;
   font-color: #fff;
-  margin-top: 24px;
+  margin-top: 0px;
 }
 
 /* 右侧内容栏 */
