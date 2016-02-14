@@ -5335,8 +5335,14 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	
     margin-bottom: -1px;
     color: #fff;
+	
+	/*Modify by Nemo__ START,
     background-color: #1abc9c;
-    border: 0px solid #1abc9c;/*115449;*/
+    border: 0px solid #1abc9c;*/
+	background-color: #337ae7;
+    border: 0px solid #337ae7;
+	/*Modify by Nemo__ END*/
+	
     border-left: 0px;
     border-right: 0px;
     /*border: 0px solid #ddd;*/
@@ -5351,7 +5357,10 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 a.list-group-item-lay:hover, a.list-group-item-lay:focus {
     text-decoration: none;
     color: #fff;
-    background-color: #16a085;
+	
+	/*Modify by Nemo__ START,
+    background-color: #16a085;*/
+	background-color: #3060d0;
 }
 
 .list-group-item-lay:first-child {
