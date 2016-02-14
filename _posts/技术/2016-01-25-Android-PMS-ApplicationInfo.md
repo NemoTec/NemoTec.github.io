@@ -125,7 +125,7 @@ boolean型，标明当前应用所有组件是否可用。
 ``public ApplicationInfo()``  
 ``public ApplicationInfo(ApplicationInfo orig)``  
 ``private ApplicationInfo(Parcel source)``  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;构造函数，同父类PackageItemInfo一样ApplicationInfo也提供三个构造函数，一个无参的，一个参数为另一个ApplicationInfo，一个参数为Parcel。  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;构造函数，同父类PackageItemInfo一样ApplicationInfo也提供三个构造函数，一个无参的，一个参数为另一个ApplicationInfo，一个参数为Parcel。  
 
 ``public void writeToParcel(Parcel dest, int parcelableFlags)``  
 实现Parcelable接口。  
@@ -139,7 +139,7 @@ boolean型，标明当前应用所有组件是否可用。
 ``public boolean isForwardLocked()``  
 判断当前应用是否被锁定。``privateFlags``与``ApplicationInfo.PRIVATE_FLAG_FORWARD_LOCK``按位与不等于0返回true.  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还有一些其它方基本也是返回当前ApplicationInfo实例的成员，以及一些isxxx方法，它们是flags与某项预定义FLAG按位与后返回的结果。  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还有一些其它方基本也是返回当前ApplicationInfo实例的成员，以及一些isxxx方法，它们是flags与某项预定义FLAG按位与后返回的结果。  
 &nbsp;  
 
 ### 五、调用情况
@@ -172,7 +172,8 @@ boolean型，标明当前应用所有组件是否可用。
 **总结1：任一时刻，系统中安装过的apk都会被解析完成，包信息被存放在PackageManagerService中的``mPackages``，它是以包名为Key, 以``PackageParser.Package``为Value的HashMap。当然每个新安装的应用的ApplicationInfo也是在从最初被解析出来，最后存放在这里的。**  
 
 #### 2. PackageManagerService中传出ApplicationInfo的方法
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上一步分析可知，所有应用的ApplicationInfo均是存放在PackageManagerService的mPackages成员中，所以要取得某个应用的ApplicationInfo必须通过mPackages.get(packageName);先取到该packageName的Package. 这样就可以在PackageManagerService中查找有哪些地方这样调用了。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上一步分析可知，所有应用的ApplicationInfo均是存放在PackageManagerService的mPackages成员中，所以要取得某个应用的ApplicationInfo必须通过mPackages.get(packageName);先取到该packageName的Package. 这样就可以在PackageManagerService中查找有哪些地方这样调用了。  
+
 ```
 (1) public ApplicationInfo getApplicationInfo(String packageName, int flags, int userId)
 {    
@@ -186,21 +187,23 @@ boolean型，标明当前应用所有组件是否可用。
         }
     }
 }
-```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以看到PackageManagerService中的``getApplicationInfo()``方法是取``mPackages``中Key为传入的包名对应的Value, 然后用``PackageParser.generateApplicationInfo()``方法来生成ApplicationInfo并返回。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``generateApplicationInfo()``方法中主要有一句: ``ApplicationInfo ai = new ApplicationInfo(p.applicationInfo)``; 传给外部的是一份拷贝，而不是直接传递给外部``p.applicationInfo``, 当然也有特殊情况。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;外部调用``getApplicationInfo()``一般是通过``PackageManager.getApplicationInfo()``, 而它的实现最终是在ApplicationPackageManager中通过IPackageManager调用到``PackageManagerService.getApplicationInfo()``。
+```  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以看到PackageManagerService中的``getApplicationInfo()``方法是取``mPackages``中Key为传入的包名对应的Value, 然后用``PackageParser.generateApplicationInfo()``方法来生成ApplicationInfo并返回。  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``generateApplicationInfo()``方法中主要有一句: ``ApplicationInfo ai = new ApplicationInfo(p.applicationInfo)``; 传给外部的是一份拷贝，而不是直接传递给外部``p.applicationInfo``, 当然也有特殊情况。  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;外部调用``getApplicationInfo()``一般是通过``PackageManager.getApplicationInfo()``, 而它的实现最终是在ApplicationPackageManager中通过IPackageManager调用到``PackageManagerService.getApplicationInfo()``。
 
 **(2) public ParceledListSlice \<ApplicationInfo\> getInstalledApplications(int flags, int userId)**  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;它是取出``mPackages``中所有的Package,然后通过``PackageParser.generateApplicationInfo()``传出每个Package的applicationInfo成员。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同理在PackageManager中也有同名方法，外部通过``PackageManager.getInstalledApplications()``方法来获取所有已安装的包的ApplicationInfo。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;它是取出``mPackages``中所有的Package,然后通过``PackageParser.generateApplicationInfo()``传出每个Package的applicationInfo成员。  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同理在PackageManager中也有同名方法，外部通过``PackageManager.getInstalledApplications()``方法来获取所有已安装的包的ApplicationInfo。
 
 **(3) public List \<ApplicationInfo\> getPersistentApplications(int flags)**  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里返回具有常驻属性的ApplicationInfo。同理也是从``mPackages``中取出``Package p``, 如果p的``applicationInfo.flags``有ApplicationInfo.FLAG_PERSISTENT属性，就把它加入到结果列表中，当然对于每一个符合条件的Package, 也是通过``PackageParser.generateApplicationInfo()``分别传出其applicationInfo成员。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**这个方法只在ActivityManagerService的systemReady()方法中，通过接口``IPackageManager.getPersistentApplications()``调用过一次。**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里返回具有常驻属性的ApplicationInfo。同理也是从``mPackages``中取出``Package p``, 如果p的``applicationInfo.flags``有ApplicationInfo.FLAG_PERSISTENT属性，就把它加入到结果列表中，当然对于每一个符合条件的Package, 也是通过``PackageParser.generateApplicationInfo()``分别传出其applicationInfo成员。  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**这个方法只在ActivityManagerService的systemReady()方法中，通过接口``IPackageManager.getPersistentApplications()``调用过一次。**
 
 **(4) public PackageInfo getPackageInfo(String packageName, int flags, int userId)**  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;外部调用``getPackageInfo()``同样是通过``PackageManager.getPackageInfo()``, 而它的实现最终是在ApplicationPackageManager中通过IPackageManager调用到``PackageManagerService.getPackageInfo()``。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;外部调用``getPackageInfo()``同样是通过``PackageManager.getPackageInfo()``, 而它的实现最终是在ApplicationPackageManager中通过IPackageManager调用到``PackageManagerService.getPackageInfo()``。  
+
 ```
 public PackageInfo getPackageInfo(String packageName, int flags, int userId) {
     ....
@@ -214,19 +217,22 @@ public PackageInfo getPackageInfo(String packageName, int flags, int userId) {
     }
     return null;
 }
-```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageManagerService中``getPackageInfo()``方法同样从``mPackages``中取packageName对应的``Package p``, 把它传入``generatePackageInfo()``。间接调用的是``PackageParser.generatePackageInfo()``, 它其中有一句：
-``pi.applicationInfo = generateApplicationInfo(p, flags, state, userId);``所以最终也是取得``mPackages``中的一个Package的applicationInfo, 用它来构造传出的``PackageInfo.applicationInfo``。
-<br/>
+```  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageManagerService中``getPackageInfo()``方法同样从``mPackages``中取packageName对应的``Package p``, 把它传入``generatePackageInfo()``。间接调用的是``PackageParser.generatePackageInfo()``, 它其中有一句：
+``pi.applicationInfo = generateApplicationInfo(p, flags, state, userId);``所以最终也是取得``mPackages``中的一个Package的applicationInfo, 用它来构造传出的``PackageInfo.applicationInfo``。  
+&nbsp;  
 
 #### 3. 真正new出ApplicationInfo  
 (1) PackageParser中最终new出新Application实例的地方就是通过``generateApplicationInfo()``方法：  
+
 ```
 public static ApplicationInfo generateApplicationInfo(Package p, int flags, PackageUserState state, int userId)  
 public static ApplicationInfo generateApplicationInfo(ApplicationInfo ai, int flags, PackageUserState state, int userId)
 ```  
 
-(2) PackageManagerService中以下方法就是调用PackageParser的``generateApplicationInfo()``方法或通过对应generateXXX()方法间接调用到``generateApplicationInfo()``.
+(2) PackageManagerService中以下方法就是调用PackageParser的``generateApplicationInfo()``方法或通过对应generateXXX()方法间接调用到``generateApplicationInfo()``.  
+
 ```
 PackageManagerService:  
 public ApplicationInfo getApplicationInfo(String packageName, int flags, int userId) 
@@ -240,6 +246,7 @@ public ProviderInfo getProviderInfo(ComponentName component, int flags, int user
 ```
 
 (3) PackageManagerService中``getActivityInfo()``等方法调用到的PackageParser对应的``generateActivityInfo()``等。它们最终都是通过``generateApplicationInfo()``生成对外的ApplicationInfo实例。  
+
 ```
 PackageParser:
 public static PackageInfo generatePackageInfo(PackageParser.Package p, ...)
@@ -358,6 +365,7 @@ if (pkg.packageName.equals("android")) {
 }
 ```
 而这个包名为"android"的apk其实是framework-res.apk,也就是PackageManagerService中mAndroidApplication存放的是framework-res.apk的ApplicationInfo信息。  
+&nbsp;  
 &nbsp;  
 
 **总结：**  
