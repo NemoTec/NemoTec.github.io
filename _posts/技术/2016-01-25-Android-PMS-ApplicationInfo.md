@@ -7,54 +7,55 @@ keywords: ApplicationInfo, Android源码, ApplicationInfo类解析
 description: Android源码android.content.pm.ApplicationInfo类的解析。ApplicationInfo, 通过它可以得到一个应用基本信息。本文将解析所有ApplicationInfo的来源，传递，使用。
 ---
 
-注：转载请注明来自Nemo, http://nemotec.github.io
-<br/>
+注：转载请注明来自Nemo, http://nemotec.github.io  
+&nbsp;  
+&nbsp;  
 
-#### 一、包名  
+### 一、包名  
 包名：``android.content.pm.ApplicationInfo``  
 父类：``android.content.pm.PackageItemInfo``  
 接口：``android.os.Parcelable``   
 子类：无  
-<br/>
+&nbsp;  
 
-#### 二、概述        
+### 二、概述        
 Information you can retrieve about a particular application. This corresponds to information collected from the AndroidManifest.xml's \<application\> tag.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**ApplicationInfo**, 通过它可以得到一个应用基本信息。这些信息是从AndroidManifest.xml的\<application>标签获取的。  
-<br/>
+&nbsp;  
 
-#### 三、主要成员  
+### 三、主要成员  
 ``public String taskAffinity;``  
-String型, 当前应用所有Activity的默认task密切性。可以参考ActivityInfo的taskAffinity,从"**android:taskAffinity**"属性得到。具体taskAffinity是怎么影响到Activity在task的启动, 后面会在Activity启动模式中细讲。
+String型，当前应用所有Activity的默认task密切性。可以参考ActivityInfo的taskAffinity,从"**android:taskAffinity**"属性得到。具体taskAffinity是怎么影响到Activity在task的启动, 后面会在Activity启动模式中细讲。  
 
 ``public String permission;``  
-String型, 可选项,访问当前应用所有组件需要声明的权限，从"**android:permission**"属性得到。
+String型，可选项,访问当前应用所有组件需要声明的权限，从"**android:permission**"属性得到。  
 
 ``public String processName;``  
-String型, 从"**android:process**"属性得到，注明应用运行的进程名。或不设置则默认为应用包名。
+String型，从"**android:process**"属性得到，注明应用运行的进程名。或不设置则默认为应用包名。  
 
 ``public String className;``  
-String型, 从"**android:class**"属性得到，应用实现的Application类的类名。
+String型，从"**android:class**"属性得到，应用实现的Application类的类名。  
 
 ``public int descriptionRes;``  
-int型, 从"**android:description**"属性得到，对Application组件的描述。若不设置则为0。
+int型，从"**android:description**"属性得到，对Application组件的描述。若不设置则为0。  
 
 ``public int theme;``  
-int型, 从"**android:theme**"属性得到，注明应用的主题。若不设置则为0。
+int型，从"**android:theme**"属性得到，注明应用的主题。若不设置则为0。  
 
 ``public String manageSpaceActivityName;``  
-String型, 从"**android:manageSpaceActivity**"属性得到，用于指定一个Activity来管理数据，它最终会出现在设置->应用程序管理中，默认为按钮为"清除数据"，指定此属性后，该按钮可点击跳转到该Activity, 让用户选择性清除哪些数据。若不设置则为null.
+String型，从"**android:manageSpaceActivity**"属性得到，用于指定一个Activity来管理数据，它最终会出现在设置->应用程序管理中，默认为按钮为"清除数据"，指定此属性后，该按钮可点击跳转到该Activity, 让用户选择性清除哪些数据。若不设置则为null。  
 
 ``public String backupAgentName;``  
-String型, 从"**android:backupAgent**"属性得到，Android原生的备份引擎BackupManagerService在应用端的实现类，是backupAgent的子类。默认不会由系统备份，若"**android:allowBackup**"值为false, 则该属性设置无效。
+String型，从"**android:backupAgent**"属性得到，Android原生的备份引擎BackupManagerService在应用端的实现类，是backupAgent的子类。默认不会由系统备份，若"**android:allowBackup**"值为false, 则该属性设置无效。  
 
 ``public int fullBackupContent = 0;``  
-int型, 可选项，注明应用是否支持自动备份。
+int型，可选项，注明应用是否支持自动备份。  
 
 ``public int uiOptions = 0;``  
-int型, 为应用内所有Activity设置的默认UI选项，可选值为``"none"``, ``"splitActionBarWhenNarrow"``。
+int型，为应用内所有Activity设置的默认UI选项，可选值为``"none"``, ``"splitActionBarWhenNarrow"``。  
 
 ``public int flags = 0;``  
-int型, 应用manifest中设置的各项属性的按位或的组合, 共31个：
+int型，应用manifest中设置的各项属性的按位或的组合, 共31个：  
 |manifest|FLAG|value|
 |-----|-----|-----|
 |==system/app==|FLAG_SYSTEM|1<<0|
@@ -90,38 +91,37 @@ int型, 应用manifest中设置的各项属性的按位或的组合, 共31个：
 |==support multiple instruction sets==|FLAG_MULTIARCH|1<< 31|  
 
 ``public String sourceDir;``  
-String型, 应用APK的全路径。
+String型，应用APK的全路径。  
 
 ``public String publicSourceDir;``  
-String型, sourceDir公开可访问的部分。被forward lock锁定的应用该值可能与sourceDiri不一样。
+String型，sourceDir公开可访问的部分。被forward lock锁定的应用该值可能与sourceDiri不一样。  
 
 ``public String[] resourceDirs;``  
-String型, 当前应用有额外资源包时，该资源的全路径。通常为null.
+String型，当前应用有额外资源包时，该资源的全路径。通常为null。  
 
 ``public String seinfo;``  
-String型, 来自SELinux策略中``seinfo``标签，这个值一般在设置应用进程的SELinux安全上下文时有用。
+String型，来自SELinux策略中``seinfo``标签，这个值一般在设置应用进程的SELinux安全上下文时有用。  
 
 ``public String dataDir;``  
-String型, 应用数据目录。
-
+String型，应用数据目录。  
 
 ``public String nativeLibraryDir;``  
-String型, JNI本地库存放路径。  
+String型，JNI本地库存放路径。  
 
 ``public int uid;``  
-int型, ``kernel user-ID``，目前对每个应用还不是唯一的，存在几个应用共享一个UID的情况。
+int型，``kernel user-ID``，目前对每个应用还不是唯一的，存在几个应用共享一个UID的情况。  
 
 ``public int targetSdkVersion;``  
-int型, 最低的目标SDK版本号。
+int型，最低的目标SDK版本号。  
 
 ``public int versionCode;``  
-int型, 应用的版本号.
+int型，应用的版本号。  
 
 ``public boolean enabled = true;``  
-boolean型, 标明当前应用所有组件是否可用。  
-<br/>
+boolean型，标明当前应用所有组件是否可用。  
+&nbsp;  
 
-#### 四、主要方法  
+### 四、主要方法  
 ``public ApplicationInfo()``  
 ``public ApplicationInfo(ApplicationInfo orig)``  
 ``private ApplicationInfo(Parcel source)``  
@@ -140,10 +140,10 @@ boolean型, 标明当前应用所有组件是否可用。
 判断当前应用是否被锁定。``privateFlags``与``ApplicationInfo.PRIVATE_FLAG_FORWARD_LOCK``按位与不等于0返回true.  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还有一些其它方基本也是返回当前ApplicationInfo实例的成员，以及一些isxxx方法，它们是flags与某项预定义FLAG按位与后返回的结果。  
-<br/>
+&nbsp;  
 
-#### 五、调用情况
-##### 1. 解析manifest得到ApplicationInfo信息  
+### 五、调用情况
+#### 1. 解析manifest得到ApplicationInfo信息  
 (1) **PackageParser中parseBaseApk()方法，会解析指定路径apk的AndroidManifest.xml文件**，遇到tag为"application"时，会调用``parseBaseApplication()``方法来完成接下来的节点解析工作。可以看到最后的解析结果都会存放在``parseBaseApplication()``传入的参数owner中，它是``PackageParser.Package``类型。也就是**所有ApplicationInfo信息的来源均是从这个传出的Package得来。**  
 >【PackageParser】parseBaseApk(三参)  
 &nbsp;↓  
@@ -171,7 +171,7 @@ boolean型, 标明当前应用所有组件是否可用。
 
 **总结1：任一时刻，系统中安装过的apk都会被解析完成，包信息被存放在PackageManagerService中的``mPackages``，它是以包名为Key, 以``PackageParser.Package``为Value的HashMap。当然每个新安装的应用的ApplicationInfo也是在从最初被解析出来，最后存放在这里的。**  
 
-##### 2. PackageManagerService中传出ApplicationInfo的方法
+#### 2. PackageManagerService中传出ApplicationInfo的方法
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上一步分析可知，所有应用的ApplicationInfo均是存放在PackageManagerService的mPackages成员中，所以要取得某个应用的ApplicationInfo必须通过mPackages.get(packageName);先取到该packageName的Package. 这样就可以在PackageManagerService中查找有哪些地方这样调用了。
 ```
 (1) public ApplicationInfo getApplicationInfo(String packageName, int flags, int userId)
@@ -219,7 +219,7 @@ public PackageInfo getPackageInfo(String packageName, int flags, int userId) {
 ``pi.applicationInfo = generateApplicationInfo(p, flags, state, userId);``所以最终也是取得``mPackages``中的一个Package的applicationInfo, 用它来构造传出的``PackageInfo.applicationInfo``。
 <br/>
 
-##### 3. 真正new出ApplicationInfo  
+#### 3. 真正new出ApplicationInfo  
 (1) PackageParser中最终new出新Application实例的地方就是通过``generateApplicationInfo()``方法：  
 ```
 public static ApplicationInfo generateApplicationInfo(Package p, int flags, PackageUserState state, int userId)  
@@ -239,7 +239,7 @@ public ServiceInfo getServiceInfo(ComponentName component, int flags, int userId
 public ProviderInfo getProviderInfo(ComponentName component, int flags, int userId)
 ```
 
-(3) PackageManagerService中``getActivityInfo()``等方法调用到的PackageParser对应的``generateActivityInfo()``等。它们最终都是通过``generateApplicationInfo()``生成对外的ApplicationInfo实例。
+(3) PackageManagerService中``getActivityInfo()``等方法调用到的PackageParser对应的``generateActivityInfo()``等。它们最终都是通过``generateApplicationInfo()``生成对外的ApplicationInfo实例。  
 ```
 PackageParser:
 public static PackageInfo generatePackageInfo(PackageParser.Package p, ...)
@@ -249,7 +249,7 @@ public static final ServiceInfo generateServiceInfo(Service s, int flags, Packag
 public static final ProviderInfo generateProviderInfo(Provider p, int flags, PackageUserState state, int userId)  
 ```  
 
-总结：外部拿到ApplicationInfo信息的过程如下
+总结：外部拿到ApplicationInfo信息的过程如下：  
 >【PackageManager】getActivityInfo()  
 &nbsp;↓  
 【ApplicationPackageManager】getActivityInfo()  
@@ -262,20 +262,24 @@ public static final ProviderInfo generateProviderInfo(Provider p, int flags, Pac
 &nbsp;↓  
 【PackageParser】generateApplicationInfo()  
 
-其它的PackageInfo, ServiceInfo, ProviderInfo等过程相同。
+其它的PackageInfo, ServiceInfo, ProviderInfo等过程相同。  
+&nbsp;  
 
-##### 4. 其它类的成员变量  
+#### 4. 其它类的成员变量  
 **(1) 【ActivityRecord】**[``final ApplicationInfo appInfo;``]
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ActivityRecord对appInfo成员进行赋值的地方只有其构造函数``appInfo = aInfo.applicationInfo;``我们搜索哪些地方会new ActivityRecord实例:  
 a. ``ActivityStackSupervisor.startActivityLocked()``，这里是启动Activity过程中的一个方法，这里new ActivityRecord()的参数中传入的ActivityInfo实例是外部传入的，这个ActivityInfo是在``startActivityMayWait()``生成的，它最终是通过``PackageManagerService.resolveIntent()``得到ResolveInfo实例，返回``rInfo.activityInfo``.  
 b. ``restoreFromXml()``，这个函数也只有一处调用，它是Android的重启恢复Task功能，在``ActivityManagerService.systemReady()``有一句``mRecentTasks.addAll(mTaskPersister.restoreTasksLocked());``TaskPersister的restoreTasksLocked()方法会读取存储的Task文件目录，递归解析每个文件，通过``TaskRecord.restoreFromXml(in, mStackSupervisor)``分别生成TaskRecord, 其中一句``ActivityRecord activity = ActivityRecord.restoreFromXml(in, stackSupervisor);``在restoreFromXml()中
-``ActivityInfo aInfo = stackSupervisor.resolveActivity(intent, resolvedType, 0, null, userId);``最后把aInfo作为参数构造ActivityRecord实例。
+``ActivityInfo aInfo = stackSupervisor.resolveActivity(intent, resolvedType, 0, null, userId);``最后把aInfo作为参数构造ActivityRecord实例。  
+&nbsp;  
 
 **(2) 【ServiceRecord】**[``final ApplicationInfo appInfo;``]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServiceRecord对其ApplicationInfo成员appInfo赋值同样只在其构造函数: ``appInfo = sInfo.applicationInfo;``new ServiceRecord的地方只有一处``ActiveServices.retrieveServiceLocked()``，再看构造函数传入的sInfo是从哪来的，``ResolveInfo rInfo = AppGlobals.getPackageManager().resolveService()``, 然后传入的sInfo是``rInfo.serviceInfo``.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServiceRecord对其ApplicationInfo成员appInfo赋值同样只在其构造函数: ``appInfo = sInfo.applicationInfo;``new ServiceRecord的地方只有一处``ActiveServices.retrieveServiceLocked()``，再看构造函数传入的sInfo是从哪来的，``ResolveInfo rInfo = AppGlobals.getPackageManager().resolveService()``, 然后传入的sInfo是``rInfo.serviceInfo``.  
+&nbsp;  
 
 **(3) 【ContentProviderRecord】**[``final ApplicationInfo appInfo;``]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只在ActivityManagerService中有new ContentProviderRecord实例，``getContentProviderImpl()``和``generateApplicationProvidersLocked()``分别为生成某个包指定名称的Provider信息，和生成某个应用进程所有Provider信息，构造函数传入参数均为某ProcessRecord的info成员。  
+&nbsp;  
 
 **(4) 【ProcessRecord】**[``final ApplicationInfo info;``]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化这个成员info的地方只有在ProcessRecord的构造函数，全局搜索``new ProcessRecord()``的地方，只在``ActivityManagerService.newProcessRecordLocked()``.
@@ -283,18 +287,23 @@ b. ``restoreFromXml()``，这个函数也只有一处调用，它是Android的�
 a. setSystemProcess()&nbsp;&nbsp;它会通过``PackageManager.getApplicationInfo()``, 最终是调用``PackageManagerService中.getApplicationInfo()``, 得到包名为"android"的Application对象，这里是在创建"system_server"进程时构建系统的ProcessRecord中成员info的过程。  
 b. startProcessLocked(14个参数版本)&nbsp;&nbsp;这个函数是启动一个新进程过程中的一环，在查找没有是否有已创建的packageName对应的ProcessRecord对象，如果没有就创建一个。新建的ProcessRecord也会在``newProcessRecordLocked()``经由``addProcessNameLocked()``添加到``ProcessMap< ProcessRecord> mProcessNames``成员中。新建ProcessRecord的参数也是由info传递，为``ActivityRecord.info.applicationInfo``。  
 c. addAppLocked()&nbsp;&nbsp;主要是处理具有persist属性的应用进程，它传入的参数是``ProcessRecord.info``.  
+&nbsp;  
 
 **(5) 【BackupRecord】**[``final ApplicationInfo appInfo;``]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只在``ActivityManagerService.bindBackupAgent()``方法中会去new BackupRecord, 其构造函数传入ApplicationInfo参数是由bindBackupAgent()传入。  
+&nbsp;  
 
 **(6) 【ComponentInfo】**[``public ApplicationInfo applicationInfo;``] 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一般不会直接构造ComponentInfo，外部是使用其子类ActivityInfo, ServiceInfo, ProviderInfo, 由前面可知，它们的成员变量applicationInfo最后均是调用到PackageParser的generateXXX()方法构造。  
+&nbsp;  
 
 **(7) 【PackageInfo】**[``public ApplicationInfo applicationInfo;``]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageInfo的成员applicationInfo赋值过程与ActivityInfo类似，最终是PackageParser的generatePackageInfo()方法构造。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageInfo的成员applicationInfo赋值过程与ActivityInfo类似，最终是PackageParser的generatePackageInfo()方法构造。  
+&nbsp;  
 
 **(8) 【ActivityThread.AppBindData】**[``ApplicationInfo appInfo;``]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只在ActivityThread中使用，ActivityThread有一个AppBindData类型的成员mBoundApplication。在``bindApplication()``方法中，会new一个AppBindData，它的成员appInfo被传入的ApplicationInfo参数初始化。最终这个AppBindData实例会在``handleBindApplication(AppBindData data)``中``mBoundApplication = data;``对mBoundApplication初始化完成。也就是在ActivityThread中成员mBoundApplication会存放本应用的ApplicationInfo信息。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只在ActivityThread中使用，ActivityThread有一个AppBindData类型的成员mBoundApplication。在``bindApplication()``方法中，会new一个AppBindData，它的成员appInfo被传入的ApplicationInfo参数初始化。最终这个AppBindData实例会在``handleBindApplication(AppBindData data)``中``mBoundApplication = data;``对mBoundApplication初始化完成。也就是在ActivityThread中成员mBoundApplication会存放本应用的ApplicationInfo信息。  
+&nbsp;  
 
 **(9) 【LoadedApk】**[``private ApplicationInfo mApplicationInfo;``]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们知道一个LoadedApk对应一个加载的apk, 它的成员mApplicationInfo就是该应用的应用信息，对mApplicationInfo赋值分以下两种情况：  
@@ -330,10 +339,12 @@ if ("android".equals(packageName)||"system".equals(packageName)) {
 【LoadedApk】installSystemApplicationInfo()  
 
 **b. 创建单个应用的ApplicationInfo**:  
-new一个应用的LoadedApk会在``ActivityThread.getPackageInfoNoCheck()``方法中, 构造它传入的ApplicationInfo参数一般就是启动应用某个组件时，该组件信息，比如ActivityInfo, ServiceInfo等。
+new一个应用的LoadedApk会在``ActivityThread.getPackageInfoNoCheck()``方法中, 构造它传入的ApplicationInfo参数一般就是启动应用某个组件时，该组件信息，比如ActivityInfo, ServiceInfo等。  
+&nbsp;  
 
 **(10) 【PackageParser.Package】**[``public final ApplicationInfo applicationInfo;``]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前面分析知``scanPackageLI()``和``installPackageLI()``会去构造``PackageParser.Package``，而最终是在``parseBaseApplication()``中解析Manifest文件，它相关应用信息存放到Package的成员applicationInfo。  
+&nbsp;  
 
 **(11) 【PackageManagerService】**[``ApplicationInfo mAndroidApplication;``]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对PackageManagerService的成员mAndroidApplication的赋值只在``scanPackageDirtyLI()``方法中：
@@ -347,11 +358,20 @@ if (pkg.packageName.equals("android")) {
 }
 ```
 而这个包名为"android"的apk其实是framework-res.apk,也就是PackageManagerService中mAndroidApplication存放的是framework-res.apk的ApplicationInfo信息。  
-<br/>
+&nbsp;  
 
 **总结：**  
 **1. 任一时刻，系统中安装过的apk都会被解析完成，包信息被存放在PackageManagerService中的``mPackages``，它是以包名为Key，以``PackageParser.Package``为Value的HashMap。PMS中``scanPackageLI()``开机扫描已安装的apk，installPackageLI()安装新apk，最终都会走到``PackageParser.parseBaseApplication()``解析应用manifest文件，在scanPackageDirtyLI()中添加到``mPackages``.其它地方获取ApplicationInfo实例，都会间接地调用到``PackageParser.generateApplicationInfo()``.**  
+&nbsp;  
+
 **2. 系统中包名为"android"的apk其实是framework-res.apk(也可查看frameworks\base\core\res\AndroidManifest.xml中定义的包名),同时PackageManagerService中mAndroidApplication存放的是framework-res.apk的ApplicationInfo信息。framework-res.apk是"system_server"进程加载的apk.**  
+&nbsp;  
+
 **3. framework-res.apk加载过程：``SystemServer.createSystemContext()`` -> ``ActivityThread.getSystemContext()`` -> ``ContextImpl.createSystemContext()`` -> ``new LoadedApk()`` -> ``Resources.getSystem()`` -> ``AssetManager.getSystem()`` -> ``new AssetManager(true)`` -> ``android_util_AssetManager.android_content_AssetManager_init()`` -> ``android_util_AssetManager.verifySystemIdmaps()``.**  
+&nbsp;  
+
 **4. ActivityManagerService中，所有已运行的应用，它的应用记录都会被存放在``ProcessMap<ProcessRecord> mProcessNames``成员中，它是以包名为key，以ProcessRecord为value的Map，要需要启动某个新的应用进程时，会先查找mProcessNames是否已有其记录，没有才去``new ProcessRecord()``。**  
+&nbsp;  
+
 **5. 大多情况下得到一个ApplicationInfo实例是通过以下：``ActivityRecord.info.applicationInfo``, ``ProcessRecord.info``**.  
+&nbsp;  
