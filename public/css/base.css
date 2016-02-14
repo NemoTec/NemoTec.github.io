@@ -53,6 +53,7 @@ body, html {
   border-left: 2px solid #1abc9c;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  outline: none;
 }
 
 .avatar {
