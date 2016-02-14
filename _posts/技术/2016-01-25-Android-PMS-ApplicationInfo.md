@@ -125,7 +125,7 @@ boolean型，标明当前应用所有组件是否可用。
 ``public ApplicationInfo()``  
 ``public ApplicationInfo(ApplicationInfo orig)``  
 ``private ApplicationInfo(Parcel source)``  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;构造函数，同父类PackageItemInfo一样ApplicationInfo也提供三个构造函数，一个无参的，一个参数为另一个ApplicationInfo，一个参数为Parcel。  
+构造函数，同父类PackageItemInfo一样ApplicationInfo也提供三个构造函数，一个无参的，一个参数为另一个ApplicationInfo，一个参数为Parcel。  
 
 ``public void writeToParcel(Parcel dest, int parcelableFlags)``  
 实现Parcelable接口。  
@@ -341,6 +341,7 @@ c. addAppLocked()&nbsp;&nbsp;主要是处理具有persist属性的应用进程�
 
 **(9) 【LoadedApk】**[``private ApplicationInfo mApplicationInfo;``]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们知道一个LoadedApk对应一个加载的apk, 它的成员mApplicationInfo就是该应用的应用信息，对mApplicationInfo赋值分以下两种情况：  
+
 **a. 创建系统"android"包的ApplicationInfo**:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new一个SystemServer的LoadedApk，间接创建一个了包名为"android"的ApplicationInfo。  
 
