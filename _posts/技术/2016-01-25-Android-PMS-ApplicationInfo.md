@@ -145,30 +145,36 @@ boolean型，标明当前应用所有组件是否可用。
 ### 五、调用情况
 #### 1. 解析manifest得到ApplicationInfo信息  
 (1) **PackageParser中parseBaseApk()方法，会解析指定路径apk的AndroidManifest.xml文件**，遇到tag为"application"时，会调用``parseBaseApplication()``方法来完成接下来的节点解析工作。可以看到最后的解析结果都会存放在``parseBaseApplication()``传入的参数owner中，它是``PackageParser.Package``类型。也就是**所有ApplicationInfo信息的来源均是从这个传出的Package得来。**  
->【PackageParser】parseBaseApk(三参)  
-&nbsp;↓  
-【PackageParser】parseBaseApk(四参)  
-&nbsp;↓  
-【PackageParser】parseBaseApplication()  
 
-(2) PackageManagerService中, ``scanPackageLI(File...)``它在每次重启后PMS会扫描已安装的apk, 这里会调用``PackageParser.parsePackage()``方法，这样就走到(1)中, 解析出ApplicationInfo信息存放在传出的Package中，接着会用返回的Package实例为参数调用到``scanPackageLI(PackageParser.Package...)``, 最终会在``scanPackageDirtyLI()``中通过``mPackages.put(pkg.applicationInfo.packageName, pkg)``, 把新解析的Package以packageName为Key,  存放在HashMap实例``mPackages``中。  
->【PackageManagerService】scanPackageLI(File...)  
-&nbsp;↓  
+```
+【PackageParser】parseBaseApk(三参)  
+ ↓  
+【PackageParser】parseBaseApk(四参)  
+ ↓  
+【PackageParser】parseBaseApplication()  
+```
+
+(2) PackageManagerService中, ``scanPackageLI(File...)``它在每次重启后PMS会扫描已安装的apk, 这里会调用``PackageParser.parsePackage()``方法，这样就走到(1)中, 解析出ApplicationInfo信息存放在传出的Package中，接着会用返回的Package实例为参数调用到``scanPackageLI(PackageParser.Package...)``, 最终会在``scanPackageDirtyLI()``中通过``mPackages.put(pkg.applicationInfo.packageName, pkg)``, 把新解析的Package以packageName为Key,  存放在HashMap实例``mPackages``中。 
+ 
+```
+【PackageManagerService】scanPackageLI(File...)  
+ ↓  
 【PackageParser】parsePackage()  
-&nbsp;↓  
+ ↓  
 【PackageParser】parseBaseApk()  
-&nbsp;....  
+ ....  
 【PackageManagerService】scanPackageLI(PackageParser.Package...)  
-&nbsp;↓  
-【PackageManagerService】scanPackageDirtyLI(): ``mPackages.put(pkg.applicationInfo.packageName, pkg);``
+ ↓  
+【PackageManagerService】scanPackageDirtyLI(): mPackages.put(pkg.applicationInfo.packageName, pkg);
+```
 
 (3) 这里``installPackageLI()``是外部调用PackageManager的方法``installPackage()``时，走到PackageManagerService内部会走到的方法，可以看到最后还是走到(2)中讲到的``scanPackageLI()``，这样新安装的apk对应的Package也会被添加到PackageManagerService的``mPackages``中去。  
 
 ```
 【PackageManagerService】installPackageLI()  
-&nbsp;↓  
+ ↓  
 【PackageManagerService】installNewPackageLI()  
-&nbsp;↓  
+ ↓  
 【PackageManagerService】scanPackageLI(PackageParser.Package...)  
 ```
 
@@ -260,17 +266,20 @@ public static final ProviderInfo generateProviderInfo(Provider p, int flags, Pac
 ```
 
 总结：外部拿到ApplicationInfo信息的过程如下：  
->【PackageManager】getActivityInfo()  
-&nbsp;↓  
+
+```
+【PackageManager】getActivityInfo()  
+ ↓  
 【ApplicationPackageManager】getActivityInfo()  
-&nbsp;↓  
+ ↓  
 【IPackageManager】getActivityInfo()  
-&nbsp;↓  
+ ↓  
 【PackageManagerService】getActivityInfo()  
-&nbsp;↓  
+ ↓  
 【PackageParser】generateActivityInfo()  
-&nbsp;↓  
+ ↓  
 【PackageParser】generateApplicationInfo()  
+```
 
 其它的PackageInfo, ServiceInfo, ProviderInfo等过程相同。  
 &nbsp;  
@@ -298,10 +307,8 @@ b. ``restoreFromXml()``，这个函数也只有一处调用，它是Android的�
 **(4) 【ProcessRecord】**[``final ApplicationInfo info;``]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化这个成员info的地方只有在ProcessRecord的构造函数，全局搜索``new ProcessRecord()``的地方，只在``ActivityManagerService.newProcessRecordLocked()``.
 调用它的地方只在ActivityManagerService:  
-&nbsp;  
 
-a. setSystemProcess()&nbsp;&nbsp;它会通过``PackageManager.getApplicationInfo()``, 最终是调用``PackageManagerService中.getApplicationInfo()``, 得到包名为"android"的Application对象，这里是在创建"system_server"进程时构建系统的ProcessRecord中成员info的过程。  
-&nbsp;  
+a. setSystemProcess()&nbsp;&nbsp;它会通过``PackageManager.getApplicationInfo()``, 最终是调用``PackageManagerService中.getApplicationInfo()``, 得到包名为"android"的Application对象，这里是在创建"system_server"进程时构建系统的ProcessRecord中成员info的过程。   
 
 b. startProcessLocked(14个参数版本)&nbsp;&nbsp;这个函数是启动一个新进程过程中的一环，在查找没有是否有已创建的packageName对应的ProcessRecord对象，如果没有就创建一个。新建的ProcessRecord也会在``newProcessRecordLocked()``经由``addProcessNameLocked()``添加到``ProcessMap< ProcessRecord> mProcessNames``成员中。新建ProcessRecord的参数也是由info传递，为``ActivityRecord.info.applicationInfo``。  
 c. addAppLocked()&nbsp;&nbsp;主要是处理具有persist属性的应用进程，它传入的参数是``ProcessRecord.info``.  
@@ -327,34 +334,42 @@ c. addAppLocked()&nbsp;&nbsp;主要是处理具有persist属性的应用进程�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们知道一个LoadedApk对应一个加载的apk, 它的成员mApplicationInfo就是该应用的应用信息，对mApplicationInfo赋值分以下两种情况：  
 **a. 创建系统"android"包的ApplicationInfo**:  
 new一个SystemServer的LoadedApk，间接创建一个了包名为"android"的ApplicationInfo。  
->【SystemServer】main()  
-&nbsp;↓  
-【SystemServer】run()  
-&nbsp;↓  
-【SystemServer】createSystemContext()  
-&nbsp;↓  
-【ActivityThread】getSystemContext()  
-&nbsp;↓  
-【ContextImpl】createSystemContext()  
-&nbsp;↓  
-【LoadedApk】LoadedApk(mainThread)  
 
-接着在``SystemServer.run()``中，调用到方法``startBootstrapServices()``，在AMS的``setSystemProcess()``中，``ApplicationInfo info = mContext.getPackageManager().getApplicationInfo("android", STOCK_PM_FLAGS);``一句会拿到最后写入LoadedApk的ApplicationInfo实例。它实际是走到PMS的``getApplicationInfo("android", ...)``，其中对于"android"包的处理：
+```
+【SystemServer】main()  
+ ↓  
+【SystemServer】run()  
+ ↓  
+【SystemServer】createSystemContext()  
+ ↓  
+【ActivityThread】getSystemContext()  
+ ↓  
+【ContextImpl】createSystemContext()  
+ ↓  
+【LoadedApk】LoadedApk(mainThread)  
+```
+
+接着在``SystemServer.run()``中，调用到方法``startBootstrapServices()``，在AMS的``setSystemProcess()``中，``ApplicationInfo info = mContext.getPackageManager().getApplicationInfo("android", STOCK_PM_FLAGS);``一句会拿到最后写入LoadedApk的ApplicationInfo实例。它实际是走到PMS的``getApplicationInfo("android", ...)``，其中对于"android"包的处理：  
+
 ```
 if ("android".equals(packageName)||"system".equals(packageName)) {
     return mAndroidApplication;
 }
 ```
-后面PMS对mAndroidApplication赋值也只有一处，在``scanPackageDirtyLI()``中，是扫描系统中安装的apk包名为"android"，后面我们会知道它其实就是"framework-res.apk"。
->【SystemServer】startBootstrapServices()  
-&nbsp;↓  
+
+后面PMS对mAndroidApplication赋值也只有一处，在``scanPackageDirtyLI()``中，是扫描系统中安装的apk包名为"android"，后面我们会知道它其实就是"framework-res.apk"。  
+
+```
+【SystemServer】startBootstrapServices()  
+ ↓  
 【ActivityManagerService】setSystemProcess()  
-&nbsp;↓  
+ ↓  
 【ActivityThread】installSystemApplicationInfo()  
-&nbsp;↓  
+ ↓  
 【ContextImpl】installSystemApplicationInfo()  
-&nbsp;↓  
+ ↓  
 【LoadedApk】installSystemApplicationInfo()  
+```
 
 **b. 创建单个应用的ApplicationInfo**:  
 new一个应用的LoadedApk会在``ActivityThread.getPackageInfoNoCheck()``方法中, 构造它传入的ApplicationInfo参数一般就是启动应用某个组件时，该组件信息，比如ActivityInfo, ServiceInfo等。  
@@ -365,7 +380,8 @@ new一个应用的LoadedApk会在``ActivityThread.getPackageInfoNoCheck()``方�
 &nbsp;  
 
 **(11) 【PackageManagerService】**[``ApplicationInfo mAndroidApplication;``]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对PackageManagerService的成员mAndroidApplication的赋值只在``scanPackageDirtyLI()``方法中：
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对PackageManagerService的成员mAndroidApplication的赋值只在``scanPackageDirtyLI()``方法中：  
+
 ```
 if (pkg.packageName.equals("android")) {
     ....
@@ -375,6 +391,7 @@ if (pkg.packageName.equals("android")) {
     }
 }
 ```
+
 而这个包名为"android"的apk其实是framework-res.apk,也就是PackageManagerService中mAndroidApplication存放的是framework-res.apk的ApplicationInfo信息。  
 &nbsp;  
 &nbsp;  
