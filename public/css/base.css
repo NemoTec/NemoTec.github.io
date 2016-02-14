@@ -51,7 +51,8 @@ body, html {
   /*background-image: url(/public/img/body_bg.jpg);*/
   background-color: #303030;
   border-left: 2px solid #1abc9c;
-  border-radius: 6px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 .avatar {
