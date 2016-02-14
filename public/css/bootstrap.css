@@ -5335,14 +5335,8 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	
     margin-bottom: -1px;
     color: #fff;
-	
-	/*Modify by Nemo__ START,
     background-color: #1abc9c;
-    border: 0px solid #1abc9c;*/
-	background-color: #d3d3d3;
-    border: 0px solid #d3d3d3;
-	/*Modify by Nemo__ END*/
-	
+    border: 0px solid #1abc9c;
     border-left: 0px;
     border-right: 0px;
     /*border: 0px solid #ddd;*/
@@ -5357,10 +5351,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 a.list-group-item-lay:hover, a.list-group-item-lay:focus {
     text-decoration: none;
     color: #fff;
-	
-	/*Modify by Nemo__ START,
-    background-color: #16a085;*/
-	background-color: #3060d0;
+    background-color: #16a085;
 }
 
 .list-group-item-lay:first-child {
@@ -5806,26 +5797,26 @@ a.list-group-item-danger.active:focus {
 
 /*Modify by Nemo__, 'panel-primary' all color to the Bootstrap v3.3.5, changed.*/
 .panel-primary {
-    border-color: #337ae7;
+    border-color: #337ab7;
 }
 
 .panel-primary>.panel-heading {
     color: #fff;
-    background-color: #337ae7;
-    border-color: #337ae7;
+    background-color: #337ab7;
+    border-color: #337ab7;
 }
 
 .panel-primary>.panel-heading+.panel-collapse>.panel-body {
-    border-top-color: #337ae7
+    border-top-color: #337ab7
 }
 
 .panel-primary>.panel-heading .badge {
-    color: #337ae7;
+    color: #337ab7;
     background-color: #fff
 }
 
 .panel-primary>.panel-footer+.panel-collapse>.panel-body {
-    border-bottom-color: #337ae7
+    border-bottom-color: #337ab7
 }
 
 .panel-success {
