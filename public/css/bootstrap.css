@@ -5330,7 +5330,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	
 	/*Modify by Nemo__ START,
 	padding: 10px 15px;*/
-    padding: 8px 8px;
+    padding: 10px 10px;
 	/*Modify by Nemo__ END*/
 	
     margin-bottom: -1px;
@@ -5795,28 +5795,28 @@ a.list-group-item-danger.active:focus {
     border-bottom-color: #ddd
 }
 
-/*Modify by Nemo__, 'panel-primary' all color to the Bootstrap v3.3.5*/
+/*Modify by Nemo__, 'panel-primary' all color to the Bootstrap v3.3.5, changed.*/
 .panel-primary {
-    border-color: #337ab7;
+    border-color: #337af7;
 }
 
 .panel-primary>.panel-heading {
     color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7;
+    background-color: #337af7;
+    border-color: #337af7;
 }
 
 .panel-primary>.panel-heading+.panel-collapse>.panel-body {
-    border-top-color: #337ab7
+    border-top-color: #337af7
 }
 
 .panel-primary>.panel-heading .badge {
-    color: #337ab7;
+    color: #337af7;
     background-color: #fff
 }
 
 .panel-primary>.panel-footer+.panel-collapse>.panel-body {
-    border-bottom-color: #337ab7
+    border-bottom-color: #337af7
 }
 
 .panel-success {
