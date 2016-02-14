@@ -5736,14 +5736,13 @@ a.list-group-item-danger.active:focus {
     margin-bottom: 0
 }
 
-<!--ssss-->
 .panel-group {
     margin-bottom: 20px;
 	
 	/*Modify by Nemo__ START,
     margin-left: 35px;*/
-	margin-left: 10px; 
-    margin-right: 10px;
+	margin-left: 20px; 
+    margin-right: 20px;
 	/*Modify by Nemo__ END*/
 	
 }
@@ -5796,27 +5795,28 @@ a.list-group-item-danger.active:focus {
     border-bottom-color: #ddd
 }
 
+/*Modify by Nemo__, 'panel-primary' all color to the Bootstrap v3.3.5*/
 .panel-primary {
-    border-color: #f5f5f5;
+    border-color: #337ab7;
 }
 
 .panel-primary>.panel-heading {
-    color: #303030;
-    background-color: #f5f5f5;
-    border-color: #f5f5f5;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
 }
 
 .panel-primary>.panel-heading+.panel-collapse>.panel-body {
-    border-top-color: #428bca
+    border-top-color: #337ab7
 }
 
 .panel-primary>.panel-heading .badge {
-    color: #428bca;
+    color: #337ab7;
     background-color: #fff
 }
 
 .panel-primary>.panel-footer+.panel-collapse>.panel-body {
-    border-bottom-color: #428bca
+    border-bottom-color: #337ab7
 }
 
 .panel-success {
