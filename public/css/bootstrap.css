@@ -5318,18 +5318,21 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 .list-group-item {
     position: relative;
     display: block;
-    padding: 8px 8px;
+    padding: 10px 15px;
     margin-bottom: -1px;
     background-color: #fff;
     border: 1px solid #f5f5f5;
-    margin-right: 10px;
-	margin-left: 10px; 
 }
 
 .list-group-item-lay {
     position: relative;
     display: block;
+	
+	/*Modify by Nemo__ START,
+	padding: 10px 15px;*/
     padding: 8px 8px;
+	/*Modify by Nemo__ END*/
+	
     margin-bottom: -1px;
     color: #fff;
     background-color: #1abc9c;
@@ -5337,8 +5340,12 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     border-left: 0px;
     border-right: 0px;
     /*border: 0px solid #ddd;*/
+	
+	/*Modify by Nemo__ START,
+	margin-right: 0px; margin-left: 35px;*/
     margin-right: 10px;
 	margin-left: 10px; 
+	/*Modify by Nemo__ END*/
 }
 
 a.list-group-item-lay:hover, a.list-group-item-lay:focus {
@@ -5729,9 +5736,16 @@ a.list-group-item-danger.active:focus {
     margin-bottom: 0
 }
 
+<!--ssss-->
 .panel-group {
     margin-bottom: 20px;
-    margin-left: 35px;
+	
+	/*Modify by Nemo__ START,
+    margin-left: 35px;*/
+	margin-left: 10px; 
+    margin-right: 10px;
+	/*Modify by Nemo__ END*/
+	
 }
 
 .panel-group .panel {
