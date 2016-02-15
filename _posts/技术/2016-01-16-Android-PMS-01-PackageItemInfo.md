@@ -12,8 +12,8 @@ description: Android源码 android.content.pm.PackageItemInfo类的解析，Pack
 &nbsp;  
 
 ### 一、包名
-包名：android.content.pm.PackageItemInfo  
-子类：(均在android.content.pm包中) ApplicationInfo, InstrumentationInfo, PermissionGroupInfo, PermissionInfo, ComponentInfo.  
+包名：``android.content.pm.PackageItemInfo``  
+子类：(均在android.content.pm包中) ``ApplicationInfo``, ``InstrumentationInfo``, ``PermissionGroupInfo``, ``PermissionInfo``, ``ComponentInfo``.  
 &nbsp;  
 
 ### 二、概述        
