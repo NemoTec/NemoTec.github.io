@@ -88,10 +88,11 @@ description: Android源码 android.content.pm.PackageItemInfo类的解析，Pack
 &nbsp;  
 
 ### 五、调用情况
-``1.PackageParser.parsePackageItemInfo()``  
+#### 1. PackageParser.parsePackageItemInfo()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parsePackageItemInfo()是PackageParser的私有方法，也是唯一的参数有PackageItemInfo的方法，它在PackageParser中三个地方被调用，分别用于解析标签<permission-group>生成PermissionGroupInfo, 解析<permission>生成PermissionInfo, 解析<permission-tree>生成PermissionInfo.  
+&nbsp;  
 
-``2.PackageParser.parseBaseApplication()``
+#### 2. PackageParser.parseBaseApplication()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parseBaseApplication()是PackageParser的私有方法，用于解析标签<application>生成ApplicationInfo, 只在PackageParser中被私有方法parseBaseApk(),  我们知PMS中scanPackageLI()最后会走到这里，也就是开机扫描所有安装apk时会解析manifest。  
 &nbsp;  
 
