@@ -65,6 +65,7 @@ private Instrumentation mInstrumentation;
 ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前面分析过从一个Activity子类A通过startActivity()方法启动另一个Activity, 最后就是走到了``ActivityThread.performLaunchActivity()``方法，在这里通过ClassLoader找到要启动的Activity子类B，然后调用Activity子类B的attach()方法给Activity子类B赋以mInstrumentation。  
+&nbsp;  
 
 1.2 startActivityForResult()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activity有几个类似的启动另一个Activity的方法startActivityForResult()一类方法，都是通过``Instrumentation.execStartActivity()``方法，并返回结果：  
@@ -81,6 +82,7 @@ Instrumentation.ActivityResult ar =  mInstrumentation.execStartActivity();
 ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从Activity的启动流程看，这个函数执行比较早的，这里的mInstrumentation要与上面的区分开来，这里是已启动的Activity子类A中的, 它已被初始化，而后面经attach后初始化的是Activity子类B的mInstrumentation。  
+&nbsp;  
 
 1.3 performStart(), performRestart(), performResume(), performStop()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activity的这四个方法会去调用 mInstrumentation的``callActivityOnStart()``, ``callActivityOnRestart()``, ``callActivityOnResume()``, ``callActivityOnStop()``, 最终Activity的这四个方法会在ActivityThread对应的performXXXActivity()方法中被调用。  
@@ -118,9 +120,11 @@ Instrumentation.ActivityResult ar =  mInstrumentation.execStartActivity();
 【ActivityThread】[attach(true)]
  ......
 ```  
+&nbsp;  
 
 (2) handleBindApplication(), [data.instrumentationName != null]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;组件显示调用startInstrumentation()方法才走到这里。此时会通过ClassLoader的loadClass()找到该Class，并实例化赋值给mInstrumentation，并通过init()进行初始化。(此处要看是否有标签<instrumentation>)  
+
 ```
 ......
 【ActivityManagerService】[startProcessLocked()]
@@ -147,9 +151,11 @@ MainActivity.this.startInstrumentation(new ComponentName("com.settings.test","an
     <instrumentation android:targetPackage="com.android.settings"
         android:name="android.test.InstrumentationTestRunner" />
 ```  
+&nbsp;  
 
 (3) handleBindApplication(), [data.instrumentationName为null]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;构造APP唯一的Instrumentation.(所有应用第一次创建会走到这里)由(2)中的流程分析，一个应用进程在第一次启动时会创建一个ActivityThread，最终会在handleBindApplication()创建一个空的Instrumentation赋给ActivityThread的成员变量mInstrumentation，后续每一个Activity在启动时经过attach()方法，都会把该mInstrumentation传入Activity赋给Activity.mInstrumentation，也就是同一个应用进程内，所有Activity共用同一个Instrumentation。  
+&nbsp;  
 
 2.2 handleBindApplication()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;创建APP的ActivityThread, Application对象。用到Instrumentation的newApplication(), callApplicationOnCreate()。  
@@ -189,6 +195,7 @@ public Application makeApplication(boolean forceDefaultAppClass, Instrumentation
 ```  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先，通过mActivityThread.mInstrumentation.newApplication()来创建一个Application实例，过程也是通过本地的ClassLoader对象loadClass()方法找到对应Class，再newInstance()。如果传入的Instrumentation不为空，就通过它的callApplicationOnCreate()方法调用当前app的Application的onCreate()方法，这里传入的是Instrumentation为null，在handleBindApplication()中会显示调用mInstrumentation的callApplicationOnCreate()。这样当前app的Application就准备好了，并在LoadedApk中会保存到mApplication。注意LoadedApk.makeApplication()第一句如果mApplication不为null，就会直接返回mApplication。这样经过第一次创建，后面要newApplication()就直接返回已创建的，所以一个app只有一个Application对象。
+&nbsp;  
 
 2.3 performLaunchActivity()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startActivity()最后执行的地方。创建要启动的Activity，并调用Activity.attach()方法传入Instrumentation及Application。用到Instrumentation的newActivity()，callActivityOnCreate().  
@@ -218,6 +225,7 @@ private Activity performLaunchActivity(ActivityClientRecord r, Intent customInte
     }
 }
 ```  
+&nbsp;  
 
 2.4 handleReceiver()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sendBroadcast()最后执行的地方。创建BroadcastReceiver对象，也是通过ClassLoader找到对应的BroadcastReceiver的Class并newInstance()，然后调用``receiver.onReceive()``。这里也会调用到`` LoadedApk.makeApplication(boolean, Instrumentation)``方法，如果当前APP的Application对象还没有创建，会通过``mActivityThread.mInstrumentation.newApplication()``来创建一个Application实例。  
@@ -247,6 +255,7 @@ private void handleReceiver(ReceiverData data) {
     }
 }
 ```  
+&nbsp;  
 
  [第一次创建ActivityThread时]  
  
@@ -265,6 +274,7 @@ private void handleReceiver(ReceiverData data) {
  ↓
 【ActivityThread】[handleReceiver()]
 ```  
+&nbsp;  
 
 [从四大组件中发送一个广播]  
 
@@ -285,6 +295,7 @@ private void handleReceiver(ReceiverData data) {
   ↓
 【ActivityThread】[handleReceiver()]
 ```  
+&nbsp;  
 
 2.5 handleCreateService()  startService()最后执行的地方。  
  [第一次创建ActivityThread时]  
@@ -302,6 +313,7 @@ private void handleReceiver(ReceiverData data) {
  ↓
 【ActivityThread】[handleCreateService()]
 ```  
+&nbsp;  
 
 [从四大组件中启动一个Service]  
 
@@ -324,6 +336,7 @@ private void handleReceiver(ReceiverData data) {
  ↓
 【ActivityThread】[handleCreateService()]
 ```  
+&nbsp;  
 
 2.6 installProvider()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Context.getContentResolver().query()最后执行的地方。  
@@ -347,6 +360,7 @@ private void handleReceiver(ReceiverData data) {
  ↓
 【ActivityThread】[installProvider()]
 ```  
+&nbsp;  
 
 Activity启动流程:  
 
