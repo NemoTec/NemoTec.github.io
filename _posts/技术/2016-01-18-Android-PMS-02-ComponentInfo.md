@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【Android源码-PMS】(二)ComponentInfo类
+title: 【PMS】(二)ComponentInfo类
 category: 技术
 tags: Android源码
 keywords: ComponentInfo, Android源码, PMS, android.content.pm.ComponentInfo

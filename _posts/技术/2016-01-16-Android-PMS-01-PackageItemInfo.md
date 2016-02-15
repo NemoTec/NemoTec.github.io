@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【Android源码-PMS】(一)PackageItemInfo类
+title: 【PMS】(一)PackageItemInfo类
 category: 技术
 tags: Android源码
 keywords: PackageItemInfo, Android源码, PMS, android.content.pm.PackageItemInfo

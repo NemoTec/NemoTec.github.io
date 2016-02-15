@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【Android源码-PMS】(三)ApplicationInfo类解析
+title: 【PMS】(三)ApplicationInfo类解析
 category: 技术
 tags: Android源码
 keywords: ApplicationInfo, Android源码, PMS, android.content.pm.ApplicationInfo
