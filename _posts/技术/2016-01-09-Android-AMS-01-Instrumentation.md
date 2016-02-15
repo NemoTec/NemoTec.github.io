@@ -68,6 +68,7 @@ private Instrumentation mInstrumentation;
 
 1.2 startActivityForResult()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activity有几个类似的启动另一个Activity的方法startActivityForResult()一类方法，都是通过``Instrumentation.execStartActivity()``方法，并返回结果：  
+
 ```
 Instrumentation.ActivityResult ar =  mInstrumentation.execStartActivity();
 
@@ -78,10 +79,12 @@ Instrumentation.ActivityResult ar =  mInstrumentation.execStartActivity();
 【Instrumentation】[execStartActivity()]  
 ......
 ```
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从Activity的启动流程看，这个函数执行比较早的，这里的mInstrumentation要与上面的区分开来，这里是已启动的Activity子类A中的, 它已被初始化，而后面经attach后初始化的是Activity子类B的mInstrumentation。  
 
 1.3 performStart(), performRestart(), performResume(), performStop()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activity的这四个方法会去调用 mInstrumentation的``callActivityOnStart()``, ``callActivityOnRestart()``, ``callActivityOnResume()``, ``callActivityOnStop()``, 最终Activity的这四个方法会在ActivityThread对应的performXXXActivity()方法中被调用。  
+
 ```
 【ActivityThread】[performLaunchActivity()]
  ↓
@@ -92,6 +95,7 @@ Instrumentation.ActivityResult ar =  mInstrumentation.execStartActivity();
 【Activity】[onStart()]
  ......
 ```
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此处mInstrumentation是被启动的Activity子类B经attach后成员变量。  
 &nbsp;  
 
@@ -101,6 +105,7 @@ Instrumentation.ActivityResult ar =  mInstrumentation.execStartActivity();
 
 (1) attach(boolean system)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此处system为true，表示创建的是SystemServer进程时，构造一个空的Instrumentation进行赋值, 并初始化SystemContext.  
+
 ```
 【SystemServer】[main()]
  ↓
@@ -136,6 +141,7 @@ Instrumentation.ActivityResult ar =  mInstrumentation.execStartActivity();
 ```  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里再跟踪哪里给data.instrumentationName赋值，instrumentationName由ActivityThread. ApplicationThread的bindApplication()方法传入，它在ActivityManagerService的attachApplicationLocked()方法中被调用，该方法传入参数为app.instrumentationClass，app为ProcessRecord对象，其内部没有给成员instrumentationClass赋值的地方，故只在外部直接赋值，经搜索在ActivityManagerService的startInstrumentation()方法，最终可回溯到ContextImpl的startInstrumentation()方法，而我们知道ContextImpl就是ContextWraper的实际成员mBase,startInstrumentation()最终是在四大组件中在代码里显示调用的，例如：  
+
 ```
 MainActivity.this.startInstrumentation(new ComponentName("com.settings.test","android.test.InstrumentationTestRunner"), null, null);  
     <instrumentation android:targetPackage="com.android.settings"
@@ -148,6 +154,7 @@ MainActivity.this.startInstrumentation(new ComponentName("com.settings.test","an
 2.2 handleBindApplication()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;创建APP的ActivityThread, Application对象。用到Instrumentation的newApplication(), callApplicationOnCreate()。  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个方法是ActivityThread创建时调用的，从前面我们知道当前app共用的一个Instrumentation也是在这里创建。紧接着就是最重要部分该app的Application创建:``Application app = data.info.makeApplication(data.restrictedBackupMode, null);``这里data.info是一个LoadedApk对象，它是对应一个apk文件所有信息的，后面研究。这里看看LoadedApk.makeApplication(boolean, Instrumentation)方法：  
+
 ```
 public Application makeApplication(boolean forceDefaultAppClass, Instrumentation instrumentation) {
     if (mApplication != null) {
@@ -179,12 +186,14 @@ public Application makeApplication(boolean forceDefaultAppClass, Instrumentation
         }
     }
 }
-```
+```  
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先，通过mActivityThread.mInstrumentation.newApplication()来创建一个Application实例，过程也是通过本地的ClassLoader对象loadClass()方法找到对应Class，再newInstance()。如果传入的Instrumentation不为空，就通过它的callApplicationOnCreate()方法调用当前app的Application的onCreate()方法，这里传入的是Instrumentation为null，在handleBindApplication()中会显示调用mInstrumentation的callApplicationOnCreate()。这样当前app的Application就准备好了，并在LoadedApk中会保存到mApplication。注意LoadedApk.makeApplication()第一句如果mApplication不为null，就会直接返回mApplication。这样经过第一次创建，后面要newApplication()就直接返回已创建的，所以一个app只有一个Application对象。
 
 2.3 performLaunchActivity()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startActivity()最后执行的地方。创建要启动的Activity，并调用Activity.attach()方法传入Instrumentation及Application。用到Instrumentation的newActivity()，callActivityOnCreate().  
-```
+
+```  
 private Activity performLaunchActivity(ActivityClientRecord r, Intent customIntent) {
     Activity activity = null;
     try {
@@ -208,10 +217,11 @@ private Activity performLaunchActivity(ActivityClientRecord r, Intent customInte
         mInstrumentation.callActivityOnCreate(activity, r.state);
     }
 }
-```
+```  
 
 2.4 handleReceiver()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sendBroadcast()最后执行的地方。创建BroadcastReceiver对象，也是通过ClassLoader找到对应的BroadcastReceiver的Class并newInstance()，然后调用``receiver.onReceive()``。这里也会调用到`` LoadedApk.makeApplication(boolean, Instrumentation)``方法，如果当前APP的Application对象还没有创建，会通过``mActivityThread.mInstrumentation.newApplication()``来创建一个Application实例。  
+
 ```
 private void handleReceiver(ReceiverData data) {
     BroadcastReceiver receiver;
@@ -236,9 +246,10 @@ private void handleReceiver(ReceiverData data) {
         ......
     }
 }
-```
+```  
 
  [第一次创建ActivityThread时]  
+ 
 ```
 【ActivityManagerService】[attachApplication()]
  ↓
@@ -256,6 +267,7 @@ private void handleReceiver(ReceiverData data) {
 ```  
 
 [从四大组件中发送一个广播]  
+
 ```
 【contextImpl】[sendBroadcast()]
   ↓
@@ -276,6 +288,7 @@ private void handleReceiver(ReceiverData data) {
 
 2.5 handleCreateService()  startService()最后执行的地方。  
  [第一次创建ActivityThread时]  
+ 
 ```
 【ActivityManagerService】[attachApplication()]
  ↓
@@ -291,7 +304,8 @@ private void handleReceiver(ReceiverData data) {
 ```  
 
 [从四大组件中启动一个Service]  
-```
+
+```  
 【contextImpl】[startService()]
  ↓
 【contextImpl】[startServiceCommon()]
@@ -313,7 +327,8 @@ private void handleReceiver(ReceiverData data) {
 
 2.6 installProvider()  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Context.getContentResolver().query()最后执行的地方。  
-```
+
+```  
 【ContentResolver】[query()][insert()][delete()][update()]
  ↓
 【ContextImpl.ApplicationContentResolver】[acquireProvider()]
@@ -334,6 +349,7 @@ private void handleReceiver(ReceiverData data) {
 ```  
 
 Activity启动流程:  
+
 ```
 【Activity】[startActivity()]
  ↓
@@ -384,13 +400,13 @@ Activity启动流程:
 ### 五、总结  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instrumentation只在Activity和ActivityThread中有实例。一个APP启动时会创建一个ActivityThread，会在ActivityThread的handleBindApplication()创建一个空的Instrumentation对象并保存在ActivityThread的成员变量mInstrumentation，后续每一个Activity在启动时经过Activity的attach()方法，都会把ActivityThread的mInstrumentation赋给Activity的成员mInstrumentation，也就是同一个应用进程内，所有Activity共用ActivityThread中的同一个Instrumentation。每一个APP的Application对像也是在handleBindApplication()中经由Instrumentation的newApplication()方法创建，且只有一个。  
 
-##### 1. 每一个应用进程中只有唯一的ActivityThread, (ActivityThread中，成员【private static ActivityThread sCurrentActivityThread】, 方法【public static ActivityThread currentActivityThread()】)  
+1.每一个应用进程中只有唯一的ActivityThread, (ActivityThread中，成员【private static ActivityThread sCurrentActivityThread】, 方法【public static ActivityThread currentActivityThread()】)  
 
-##### 2. 每一个应用进程中只有唯一的Application, (ActivityThread中，成员【Application mInitialApplication】, 方法【public Application getApplication()】)  
+2.每一个应用进程中只有唯一的Application, (ActivityThread中，成员【Application mInitialApplication】, 方法【public Application getApplication()】)  
 
-##### 3. 每一个应用进程中只有唯一的Instrumentation, (ActivityThread中，成员【Instrumentation mInstrumentation】, 方法【public Instrumentation getInstrumentation()】)  
+3.每一个应用进程中只有唯一的Instrumentation, (ActivityThread中，成员【Instrumentation mInstrumentation】, 方法【public Instrumentation getInstrumentation()】)  
 
-##### 4. 四大组件第一次启动时都会通过LoadedApk中的getClassLoader()方法，创建当前apk的PathClassLoader对象，后续每次要启组新的组件都会通过该ClassLoader来得到组件实际的Class。  
+4.四大组件第一次启动时都会通过LoadedApk中的getClassLoader()方法，创建当前apk的PathClassLoader对象，后续每次要启组新的组件都会通过该ClassLoader来得到组件实际的Class。  
 &nbsp;  
 
 进程中某类的实例唯一性判断：  
