@@ -143,6 +143,7 @@ Instrumentation.ActivityResult ar =  mInstrumentation.execStartActivity();
  ↓
 【ActivityThread】[handleBindApplication()]
 ```  
+&nbsp;  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里再跟踪哪里给data.instrumentationName赋值，instrumentationName由ActivityThread. ApplicationThread的bindApplication()方法传入，它在ActivityManagerService的attachApplicationLocked()方法中被调用，该方法传入参数为app.instrumentationClass，app为ProcessRecord对象，其内部没有给成员instrumentationClass赋值的地方，故只在外部直接赋值，经搜索在ActivityManagerService的startInstrumentation()方法，最终可回溯到ContextImpl的startInstrumentation()方法，而我们知道ContextImpl就是ContextWraper的实际成员mBase,startInstrumentation()最终是在四大组件中在代码里显示调用的，例如：  
 
@@ -194,7 +195,7 @@ public Application makeApplication(boolean forceDefaultAppClass, Instrumentation
 }
 ```  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先，通过mActivityThread.mInstrumentation.newApplication()来创建一个Application实例，过程也是通过本地的ClassLoader对象loadClass()方法找到对应Class，再newInstance()。如果传入的Instrumentation不为空，就通过它的callApplicationOnCreate()方法调用当前app的Application的onCreate()方法，这里传入的是Instrumentation为null，在handleBindApplication()中会显示调用mInstrumentation的callApplicationOnCreate()。这样当前app的Application就准备好了，并在LoadedApk中会保存到mApplication。注意LoadedApk.makeApplication()第一句如果mApplication不为null，就会直接返回mApplication。这样经过第一次创建，后面要newApplication()就直接返回已创建的，所以一个app只有一个Application对象。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先，通过mActivityThread.mInstrumentation.newApplication()来创建一个Application实例，过程也是通过本地的ClassLoader对象loadClass()方法找到对应Class，再newInstance()。如果传入的Instrumentation不为空，就通过它的callApplicationOnCreate()方法调用当前app的Application的onCreate()方法，这里传入的是Instrumentation为null，在handleBindApplication()中会显示调用mInstrumentation的callApplicationOnCreate()。这样当前app的Application就准备好了，并在LoadedApk中会保存到mApplication。注意LoadedApk.makeApplication()第一句如果mApplication不为null，就会直接返回mApplication。这样经过第一次创建，后面要newApplication()就直接返回已创建的，所以一个app只有一个Application对象。  
 &nbsp;  
 
 2.3 performLaunchActivity()  
