@@ -3,8 +3,8 @@ layout: post
 title: 【Android源码-PMS】(三)ApplicationInfo类解析
 category: 技术
 tags: Android源码
-keywords: ApplicationInfo, Android源码, ApplicationInfo类解析
-description: Android源码android.content.pm.ApplicationInfo类的解析。ApplicationInfo, 通过它可以得到一个应用基本信息。本文将解析所有ApplicationInfo的来源，传递，使用。
+keywords: ApplicationInfo, Android源码, PMS, android.content.pm.ApplicationInfo
+description: Android源码 android.content.pm.ApplicationInfo类的解析。ApplicationInfo, 通过它可以得到一个应用基本信息。本文将解析所有ApplicationInfo的来源，传递，使用。
 ---
 
 注：转载请注明来自Nemo, http://nemotec.github.io  
