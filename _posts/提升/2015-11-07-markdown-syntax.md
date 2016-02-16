@@ -60,20 +60,20 @@ description: 这篇是个人学习Markdown语法技巧时的总结，用纯文�
 >3. 有序表项03  
 
 可以:  
-102. 有序表项--01
-2. 有序表项--02
-7. 有序表项--03 
+102. 有序表项--01  
+2. 有序表项--02  
+7. 有序表项--03  
 
 也可以:
-1. 一级有序表项1
-    1. 二级有序表项1-1
-        1. 三级有序表项1-1-1
-        2. 三级有序表项1-1-2
-            4. 四四
-                5. 五五
-    2. 二级有序表项1-2
-2. 一级有序表项2
-3. 一级有序表项3
+1. 一级有序表项1  
+    1. 二级有序表项1-1  
+        1. 三级有序表项1-1-1  
+        2. 三级有序表项1-1-2  
+            4. 四四  
+                5. 五五  
+    2. 二级有序表项1-2  
+2. 一级有序表项2  
+3. 一级有序表项3  
 
 <br/>
 
@@ -244,12 +244,12 @@ A-->B
 
 <br/>
 
-#### 二十一、目录
+#### 十八、目录
 【语法】【[TOC]】  
 【效果】【】  
 <br/>
 
-#### 二十二、注脚
+#### 十九、注脚
 【语法】【】  
 【效果】【】  
 这是一个注脚测试[^footer1]。
@@ -257,7 +257,7 @@ A-->B
 
 <br/>
 
-#### 二十三、页内跳转
+#### 二十、页内跳转
 【语法】【】  
 【效果】【】  
 [页内跳转测试](#jumpTo)  
@@ -266,10 +266,8 @@ A-->B
 <br/>
 
 参考:  
-www.appinn.com/markdown  
-http://www.tuicool.com/articles/fmeMbqR  
-流程图  
-http://adrai.github.io/flowchart.js/  
-时序图  
-http://bramp.github.io/js-sequence-diagrams/  
+[Markdown语法说明](www.appinn.com/markdown)  
+[Markdown语法](http://www.tuicool.com/articles/fmeMbqR)  
+[流程图](http://adrai.github.io/flowchart.js)  
+[时序图](http://bramp.github.io/js-sequence-diagrams)  
 
