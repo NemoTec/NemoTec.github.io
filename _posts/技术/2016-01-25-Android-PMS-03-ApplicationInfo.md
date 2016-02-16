@@ -57,39 +57,39 @@ int型，为应用内所有Activity设置的默认UI选项，可选值为``"none
 ``public int flags = 0;``  
 int型，应用manifest中设置的各项属性的按位或的组合, 共31个：  
 
-| manifest | FLAG | value |  
-| ----- | ----- | ----- |  
-| ==system/app== | FLAG_SYSTEM | 1<<0 |  
-| android:debuggable | FLAG_DEBUGGABLE | 1<<1 |  
-| android:hasCode | FLAG_HAS_CODE | 1<<2 |  
-|android:persistent|FLAG_PERSISTENT|1<< 3|
-|==factory test mode==|FLAG_FACTORY_TEST|1<<4|
-|android:allowTaskReparenting|FLAG_ALLOW_TASK_REPARENTING|1<<5|
-|android:allowClearUserData|FLAG_ALLOW_CLEAR_USER_DATA| 1<<6|
-|==an update to a built-in==|FLAG_UPDATED_SYSTEM_APP|1<<7|
-|android:testOnly|FLAG_TEST_ONLY|1<<8|
-|android: smallScreens|FLAG_SUPPORTS_SMALL_SCREENS|1<<9|
-|android:normalScreens|FLAG_SUPPORTS_NORMAL_SCREENS|1<<10|
-|android:largeScreens|FLAG_SUPPORTS_LARGE_SCREENS|1<<11|
-|android:resizeable|FLAG_RESIZEABLE_FOR_SCREENS|1<<12|
-|android:anyDensity|FLAG_SUPPORTS_SCREEN_DENSITIES|1<<13|
-|android:vmSafeMode|FLAG_VM_SAFE_MODE|1<<14|
-|android:allowBackup|FLAG_ALLOW_BACKUP|1<<15|
-|android:killAfterRestore|FLAG_KILL_AFTER_RESTORE|1<<16|
-|android:restoreAnyVersion|FLAG_RESTORE_ANY_VERSION|1<<17|
-|==installed on removable storage==|FLAG_EXTERNAL_STORAGE|1<<18|
-|android:xlargeScreens|FLAG_SUPPORTS_XLARGE_SCREENS|1<<19|
-|android:largeHeap|FLAG_LARGE_HEAP|1<<20|
-|==package in stopped state==|FLAG_STOPPED|1<<21|
-|==support RTL(right to left)==|FLAG_SUPPORTS_RTL|1<<22|
-|==is currently installed==|FLAG_INSTALLED|1<<23|
-|==only data installed==|FLAG_IS_DATA_ONLY|1<<24|
-|==declared to be a game==|FLAG_IS_GAME|1<<25|
-|==full-data streaming backups==|FLAG_FULL_BACKUP_ONLY|1<<26|
-|android:usesCleartextTraffic|FLAG_USES_CLEARTEXT_TRAFFIC|1<<27|
-|==set installer extracts native libs from .apk files==|FLAG_EXTRACT_NATIVE_LIBS|1<<28|
-|==hardware accelerated==|FLAG_HARDWARE_ACCELERATED|1<<29|
-|==support multiple instruction sets==|FLAG_MULTIARCH|1<< 31|  
+manifest | FLAG | value  
+----- | ----- | ----- 
+==system/app== | FLAG_SYSTEM | 1<<0
+android:debuggable | FLAG_DEBUGGABLE | 1<<1
+android:hasCode | FLAG_HAS_CODE | 1<<2
+android:persistent|FLAG_PERSISTENT|1<< 3
+==factory test mode==|FLAG_FACTORY_TEST|1<<4
+android:allowTaskReparenting|FLAG_ALLOW_TASK_REPARENTING|1<<5
+android:allowClearUserData|FLAG_ALLOW_CLEAR_USER_DATA| 1<<6
+==an update to a built-in==|FLAG_UPDATED_SYSTEM_APP|1<<7
+android:testOnly|FLAG_TEST_ONLY|1<<8
+android: smallScreens|FLAG_SUPPORTS_SMALL_SCREENS|1<<9
+android:normalScreens|FLAG_SUPPORTS_NORMAL_SCREENS|1<<10
+android:largeScreens|FLAG_SUPPORTS_LARGE_SCREENS|1<<11
+android:resizeable|FLAG_RESIZEABLE_FOR_SCREENS|1<<12
+android:anyDensity|FLAG_SUPPORTS_SCREEN_DENSITIES|1<<13
+android:vmSafeMode|FLAG_VM_SAFE_MODE|1<<14
+android:allowBackup|FLAG_ALLOW_BACKUP|1<<15
+android:killAfterRestore|FLAG_KILL_AFTER_RESTORE|1<<16
+android:restoreAnyVersion|FLAG_RESTORE_ANY_VERSION|1<<17
+==installed on removable storage==|FLAG_EXTERNAL_STORAGE|1<<18
+android:xlargeScreens|FLAG_SUPPORTS_XLARGE_SCREENS|1<<19
+android:largeHeap|FLAG_LARGE_HEAP|1<<20
+==package in stopped state==|FLAG_STOPPED|1<<21
+==support RTL(right to left)==|FLAG_SUPPORTS_RTL|1<<22
+==is currently installed==|FLAG_INSTALLED|1<<23
+==only data installed==|FLAG_IS_DATA_ONLY|1<<24
+==declared to be a game==|FLAG_IS_GAME|1<<25
+==full-data streaming backups==|FLAG_FULL_BACKUP_ONLY|1<<26
+android:usesCleartextTraffic|FLAG_USES_CLEARTEXT_TRAFFIC|1<<27
+==set installer extracts native libs from .apk files==|FLAG_EXTRACT_NATIVE_LIBS|1<<28
+==hardware accelerated==             |FLAG_HARDWARE_ACCELERATED|1<<29
+==support multiple instruction sets==|FLAG_MULTIARCH|1<< 31  
 
 ``public String sourceDir;``  
 String型，应用APK的全路径。  
