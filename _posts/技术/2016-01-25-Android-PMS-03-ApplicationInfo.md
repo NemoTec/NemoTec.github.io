@@ -57,8 +57,21 @@ int型，为应用内所有Activity设置的默认UI选项，可选值为``"none
 ``public int flags = 0;``  
 int型，应用manifest中设置的各项属性的按位或的组合, 共31个：  
 
-manifest | FLAG | value  
------|-----|-----  
+| manifest | FLAG | value |  
+| ----- | ----- | ----- |  
+| 123 | 123 | 123 |  
+
+
+|manifest|FLAG|value|
+|-----|-----|-----|
+|123|123|123|  
+
+
+
+
+
+
+
 android:debuggable | FLAG_DEBUGGABLE | 1<<1  
 
 11111111
