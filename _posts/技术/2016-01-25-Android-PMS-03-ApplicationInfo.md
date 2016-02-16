@@ -59,6 +59,12 @@ int型，应用manifest中设置的各项属性的按位或的组合, 共31个�
 
 manifest | FLAG | value  
 -----|-----|-----  
+android:debuggable | FLAG_DEBUGGABLE | 1<<1  
+
+11111111
+
+
+
 ==system/app== | FLAG_SYSTEM | 1<<0  
 android:debuggable | FLAG_DEBUGGABLE | 1<<1  
 
