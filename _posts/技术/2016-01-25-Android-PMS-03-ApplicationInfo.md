@@ -58,10 +58,12 @@ int型，为应用内所有Activity设置的默认UI选项，可选值为``"none
 int型，应用manifest中设置的各项属性的按位或的组合, 共31个：  
 
 manifest | FLAG | value  
------ | ----- | ----- 
-==system/app== | FLAG_SYSTEM | 1<<0
-android:debuggable | FLAG_DEBUGGABLE | 1<<1
-android:hasCode | FLAG_HAS_CODE | 1<<2
+-----|-----|-----  
+==system/app== | FLAG_SYSTEM | 1<<0  
+android:debuggable | FLAG_DEBUGGABLE | 1<<1  
+
+android:hasCode | FLAG_HAS_CODE | 1<<2  
+
 android:persistent|FLAG_PERSISTENT|1<< 3
 ==factory test mode==|FLAG_FACTORY_TEST|1<<4
 android:allowTaskReparenting|FLAG_ALLOW_TASK_REPARENTING|1<<5
