@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Markdown语法技巧
-category: 提升
+category: 技术
 tags: 专业技能
 keywords: Markdown
 description: 这篇是个人学习Markdown语法技巧时的总结，用纯文本编辑打开就可以看到各示例内容的Markdown语法实现，基本可以解决最常用的Markdown编辑方法中90%的问题，更深入的研究会在学习后持续更新。
