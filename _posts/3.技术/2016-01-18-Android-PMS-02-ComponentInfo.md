@@ -7,7 +7,7 @@ keywords: ComponentInfo, Android源码, PMS, android.content.pm.ComponentInfo
 description: Android源码 android.content.pm.ComponentInfo类的解析，ComponentInfo, 代表一个应用内组件(如ActivityInfo, ServiceInfo, ProviderInfo)通用信息的基类。它设计是为了不同应用的组件共享统一的定义。
 ---
 
-注：转载请注明来自Nemo, http://nemotec.github.io  
+注：本文作者Nemo, http://nemotec.github.io  
 &nbsp;  
 &nbsp;  
 

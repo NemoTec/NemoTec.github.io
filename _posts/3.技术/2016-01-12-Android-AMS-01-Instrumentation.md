@@ -7,7 +7,7 @@ keywords: Instrumentation, Android源码, AMS, android.app.Instrumentation
 description: Android源码 android.app.Instrumentation类源码解析，及Instrumentation类在组件生命周期中的作用。
 ---
 
-注：转载请注明来自Nemo, http://nemotec.github.io  
+注：本文作者Nemo, http://nemotec.github.io  
 &nbsp;  
 &nbsp;  
 

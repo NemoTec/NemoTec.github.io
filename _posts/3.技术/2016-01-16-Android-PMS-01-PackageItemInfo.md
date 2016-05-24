@@ -7,7 +7,7 @@ keywords: PackageItemInfo, Android源码, PMS, android.content.pm.PackageItemInf
 description: Android源码 android.content.pm.PackageItemInfo类的解析，PackageItemInfo代表一个应用包内所有组件项和通用信息的基类。该类提供最基本的属性集。
 ---
 
-注：转载请注明来自Nemo, http://nemotec.github.io  
+注：本文作者Nemo, http://nemotec.github.io  
 &nbsp;  
 &nbsp;  
 
