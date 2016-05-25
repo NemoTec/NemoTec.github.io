@@ -20,6 +20,7 @@ description: 介绍面向对象设计原则之六：合成复用原则。多用�
 &nbsp;  
 
 #### **二、说明**  
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``"Composite/Aggregate Reuse Principle" 合成/聚合复用原则`` 或 ``"Composite Reuse Principle" 合成复用原则``  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``尽量使用合成/聚合，避免使用继承``。如果新对象的某些功能在别的已经创建好的对象里面已经实现，那么尽量使用别的对象提供的功能，使之成为新对象的一部分，而不要自己再重新创建。新对象通过向这些对象的委派达到复用已有功能的。  
