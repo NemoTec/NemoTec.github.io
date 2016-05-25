@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 【设计原则】面向对象六大原则之一：开闭原则
+title: 【设计原则】面向对象设计原则之一：开闭原则
 category: 架构
 tags: 设计原则
-keywords: 开闭原则
-description: 介绍面向对象设计中的六大原则之一：开闭原则。对扩展开放，对修改关闭。
+keywords: 开闭原则, 面向对象设计
+description: 介绍面向对象设计原则之一：开闭原则。对扩展开放，对修改关闭。
 ---
 注：本文来自Nemo, http://nemotec.github.io  
 &nbsp;  
