@@ -14,17 +14,19 @@ description: 介绍面向对象设计原则之二：里氏替换原则。所有�
 #### **里氏替换原则(LSP)**  
 &nbsp;  
 
-#### **【全称】**  
+#### **一、全称**  
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Liskov Substitution Principle" 里氏替换原则  
 &nbsp;  
 
-#### **【说明】** 
+#### **二、说明**  
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.``  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``所有引用基类的地方必须能够透明的使用其子类对象。`` 即只要父类出现的地方子类就能够出现，而且替换为子类不会产生任何错误或异常。但是反过来，子类出现的地方，替换为父类就可能出现问题了。这项原则最早是在1988年，由麻省理工学院的一位姓里的女士（Barbara Liskov）提出来的。  
 &nbsp;  
 
-#### **【实现】**  
+#### **三、实现**  
 
 **1. 子类可以实现父类的抽象方法，但不能（或者尽量不要）覆盖父类的非抽象方法**  
 
@@ -47,7 +49,7 @@ description: 介绍面向对象设计原则之二：里氏替换原则。所有�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当子类的方法实现父类的抽象方法时，方法的后置条件（即方法的返回值）要比父类更严格。这一条也是为在面向对象多态性时，我们事先能知道的返回结果是父类方法返回结果。为保证使用父类的引用指向子类时，通过父类引用调用方法返回的结果也适于这个返回结果，``子类方法返回结果类型应该是父类方法返回结果类型的子类``。  
 &nbsp;  
 
-#### **【优点】**  
+#### **四、优点**  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;里氏替换原则的核心原理是抽象，抽象依赖于面向对象继承这个特性，在面向对象设计中，继承的优缺点相当明显。  
 
@@ -61,7 +63,7 @@ description: 介绍面向对象设计原则之二：里氏替换原则。所有�
 (2) 可能造成子类代码冗余、灵活性降低，因为子类必须拥有父类的属性和方法。  
 &nbsp;  
 
-#### **【示例】**  
+#### **五、示例**  
 
 1.子类重写父类方法，引起抽象对象引用的行为发生未预知的错误：  
 
@@ -150,5 +152,5 @@ public class Client {
 } 
 ```  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基类方法返回类型为LinkedHashMap，子类覆盖方法的返回为Map，则可以传回的为HashMap，这样外部需要的是LinkedHashMap，可能出现类型不兼容问题。  
-&nbsp;  
 
+&nbsp;  
