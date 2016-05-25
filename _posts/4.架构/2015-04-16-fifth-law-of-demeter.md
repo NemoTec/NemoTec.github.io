@@ -15,19 +15,19 @@ description: 介绍面向对象设计原则之五：迪米特原则。迪米特�
 &nbsp;  
 
 #### **一、全称**  
-&nbsp;  
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Law of Demeter" 迪米特原则  
 &nbsp;  
 
 #### **二、说明**  
-&nbsp;  
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;迪米特法则又称为最少知识原则(Least Knowledge Principle, LKP)，来自于1987年美国东北大学(Northeastern University)一个名为“Demeter”的研究项目。  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``一个对象应该对其他对象了解最少。``迪米特法则的核心观念就是降低类与类之间的耦合。一个类对自己依赖的类知道的越少越好。对于被依赖的类来说，无论逻辑多么复杂，都尽量地的将逻辑封装在类的内部，对外除了提供的public方法，不对外泄漏任何信息。  
 &nbsp;  
 
 #### **三、实现**  
-&nbsp;  
+
 **1. 类的设计**  
 
 (1) 尽量降低类的访问权限  
@@ -61,7 +61,7 @@ description: 介绍面向对象设计原则之五：迪米特原则。迪米特�
 &nbsp;  
 
 #### **四、优点**  
-&nbsp;  
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;迪米特原则的核心原理是降低关联性，尽量减少类与类之间不必要的通信，通过第三方进行传达。  
 
 优点：  
@@ -70,4 +70,5 @@ description: 介绍面向对象设计原则之五：迪米特原则。迪米特�
 &nbsp;  
 
 #### **五、示例**  
+
 &nbsp;  
