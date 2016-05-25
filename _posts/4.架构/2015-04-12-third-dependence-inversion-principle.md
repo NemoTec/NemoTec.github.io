@@ -14,17 +14,17 @@ description: 介绍面向对象设计原则之三：依赖倒置原则。依赖�
 **依赖倒置原则(DIP)**  
 &nbsp;  
 
-【全称】 "Dependence Inversion Principle" 依赖倒置原则  
+**【全称】** "Dependence Inversion Principle" 依赖倒置原则  
 &nbsp;  
 
-【说明】 ``High level modules should depend upon low level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions.``  
+**【说明】** ``High level modules should depend upon low level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions.``  
 
 1.高层模块不应该依赖低层模块，两者都应该依赖于抽象(抽象类或接口)；  
 2.抽象(抽象类或接口)不应该依赖于细节(具体实现类)；  
 3.细节(具体实现类)应该依赖抽象。  
 &nbsp;  
 
-【实现】  
+**【实现】**  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;依赖倒置原则要求在``依赖关系``或``关联关系``中，尽量引用层次高的抽象层类，使用``接口和抽象类``进行``变量类型声明``、``参数类型声明``、``方法返回类型声明``，以及``数据类型的转换``等，而不要用具体类来做这些事情。为了确保该原则的应用，一个具体类应当``只实现接口或抽象类中声明的方法``，而不要给出多余的方法，否则将无法调用到在子类中增加的新方法。  
 
@@ -34,7 +34,7 @@ description: 介绍面向对象设计原则之三：依赖倒置原则。依赖�
 &nbsp;  
 **1. 构造函数传递依赖对象(以抽象类或接口的形式)，即: 构造注入**  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;声明的构造函数参数类型为抽象类或接口的形式，运行时传入构造函数为具体类的对象。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;声明的构造函数参数类型为抽象类或接口的形式，运行时传入构造函数为具体类的对象。  
 &nbsp;  
 **2. setter方法传递依赖对象(以抽象类或接口的形式)，即: 设值注入**  
 
@@ -45,7 +45,7 @@ description: 介绍面向对象设计原则之三：依赖倒置原则。依赖�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;声明的接口内的方法参数类型为抽象类或接口的形式，运行时传入接口内的方法为具体类的对象。  
 &nbsp;  
 
-【优点】  
+**【优点】**  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;依赖倒置原则的核心是面向接口编程，其优缺点相当明显。  
 
@@ -57,7 +57,7 @@ description: 介绍面向对象设计原则之三：依赖倒置原则。依赖�
 (1) 接口设计要考虑全面，否则后续修改接口影响范围很大。  
 &nbsp; 
  
-【示例】  
+**【示例】**  
 
 1.构造注入：  
 
