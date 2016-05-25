@@ -14,11 +14,11 @@ description: 介绍面向对象设计原则之三：依赖倒置原则。依赖�
 **依赖倒置原则(DIP)**  
 &nbsp;  
 
-#### 【全称】   
+#### **【全称】**   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Dependence Inversion Principle" 依赖倒置原则  
 &nbsp;  
 
-##### 【说明】  
+#### 【**说明**】  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``High level modules should depend upon low level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions.``  
 
 1.高层模块不应该依赖低层模块，两者都应该依赖于抽象(抽象类或接口)；  
