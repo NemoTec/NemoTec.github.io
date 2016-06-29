@@ -2,7 +2,7 @@
 layout: post
 title: 每个你讨厌的现在，都有一个不努力的曾经
 category: 好文
-tags: 好文
+tags: 学习好文
 keywords: 全新的自己
 description: 
 ---
