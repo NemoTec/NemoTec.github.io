@@ -69,7 +69,7 @@ m1-m2-m3-m4 (master)
 &nbsp;  
 现在我们保存文件（在Vim中是按下后输入``:wq``，最后是按下回车）。接下来我们注意到git在编辑选项中选择的提交处停止了rebase。  
 
-![图04](https://github.com/NemoTec/NemoTec.github.io/raw/master/public/img/7/2016-07-06/git-rebase-04.jpg)  
+![图04](https://github.com/NemoTec/NemoTec.github.io/raw/master/public/img/7/2016-07-06/git-rebase-04.png)  
 
 &nbsp;  
 这意味这git开始将f1、f2、f3生效仿佛它就是常规的rebase，但是在f3生效之后停止。事实上，我们可以看一眼停止的地方的日志就可以证明这一点。  
