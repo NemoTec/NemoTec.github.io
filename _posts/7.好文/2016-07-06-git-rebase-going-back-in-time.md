@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Git Rebase: 让时光倒流
+title: Git Rebase：让时光倒流
 category: 好文
 tags: 技术好文
-keywords: Git Rebase, Git Rebase: 让时光倒流
+keywords: Git Rebase, 让时光倒流
 description: 
 ---
 注：本文转载，[原文地址](https://www.codementor.io/git/tutorial/git-rebase-split-old-commit-master)，[译文地址](https://linux.cn/article-4046-1.html)，作者：Christoph Burgdorf, 2014-09-14.  
