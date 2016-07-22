@@ -24,12 +24,15 @@ description: Git常用命令
 ![Git常用命令](https://github.com/NemoTec/NemoTec.github.io/raw/master/public/img/7/2016-07-07/git-basic-01.png)  
 
 下面是我整理的常用 Git 命令清单。几个专用名词的译名如下。  
+
 ```
-Workspace：    工作区
-Index/Stage：  暂存区
-Repository：   仓库区（或本地仓库）
-Remote：       远程仓库
+Workspace：    工作区  
+Index/Stage：  暂存区  
+Repository：   仓库区（或本地仓库）  
+Remote：       远程仓库  
 ```
+
+&nbsp;  
 
 #### 一、新建代码库  
 
@@ -48,6 +51,7 @@ $ git clone [url]
 
 #### 二、配置  
 Git的设置文件为``.gitconfig``，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。  
+
 ```
 # 显示当前的Git配置
 $ git config --list
@@ -352,15 +356,19 @@ $ git archive
 
 #### 一、安装
 在 Windows 上安装 Git 同样轻松，有个叫做 msysGit 的项目提供了安装包：  
+
 ```
 http://msysgit.github.io/
 ```
+
 完成安装之后，就可以使用命令行的 git 工具（已经自带了 ssh 客户端）了，另外还有一个图形界面的 Git 项目管理工具。  
 
 &nbsp;  
 
 #### 二、配置
+
 配置帐号信息  
+
 ```
 git config -e [--global] # 编辑Git配置文件
 
@@ -373,11 +381,13 @@ git help config #获取帮助信息
 ```
 
 配置自动换行（自动转换坑太大）  
+
 ```
 git config --global core.autocrlf input #提交到git是自动将换行符转换为lf
 ```
 
 配置密钥  
+
 ```
 ssh-keygen -t rsa -C yanhaijing@yeah.net #生成密钥
 
@@ -385,6 +395,7 @@ ssh -T git@github.com #测试是否成功
 ```
 
 配置别名，git的命令没有自动完成功能，有点坑哈，别名派上了用场  
+
 ```
 git config --global alias.st status #git st
 git config --global alias.co checkout #git co
@@ -395,6 +406,7 @@ git config --global alias.ci commit #git ci
 &nbsp;  
 
 #### 三、仓库  
+
 ```
 git init #初始化
 git status #获取状态
@@ -409,6 +421,7 @@ git clone git://github.com/schacon/grit.git mypro#克隆到自定义文件夹
 &nbsp;  
 
 #### 四、本地
+
 ```
 git add * # 跟踪新文件
 git add -u [path] # 添加[指定路径下]已跟踪文件
@@ -466,9 +479,11 @@ git stash drop #删除stash内容
 git stash pop #恢复的同时直接删除stash内容
 git stash apply stash@{0} #恢复指定的工作现场，当你保存了不只一份工作现场时。
 ```
+
 &nbsp;  
 
 #### 五、分支  
+
 ```
 git branch#列出本地分支
 git branch -r#列出远端分支
@@ -505,6 +520,7 @@ git rebase --abort# 取消合并
 &nbsp;  
 
 #### 六、远端
+
 ```
 git fetch origin remotebranch[:localbranch]# 从远端拉去分支[到本地指定分支]
 
@@ -523,8 +539,10 @@ git checkout -b [--track] test origin/dev#基于远端dev分支，新建本地te
 &nbsp;  
 
 #### 七、源  
+
 git是一个分布式代码管理工具，所以可以支持多个仓库，在git里，服务器上的仓库在本地称之为remote。  
-个人开发时，多源用的可能不多，但多源其实非常有用。
+个人开发时，多源用的可能不多，但多源其实非常有用。  
+
 ```
 git remote add origin1 git@github.com:yanhaijing/data.js.git
 
@@ -537,9 +555,11 @@ git remote rm origin#删除
 
 git remote show origin#查看指定源的全部信息
 ```
+
 &nbsp;  
 
 #### 八、标签
+
 ```
 git tag  #列出现有标签
 
@@ -554,18 +574,23 @@ git push origin --tags#一次性推送所有分支
 git tag -d v0.1#删除标签
 git push origin :refs/tags/v0.1#删除远程标签
 ```
+
 &nbsp;  
 
-#### 九、总结
+#### 九、总结  
+
 其实还有两个最有用的命令还未提到。  
+
 ```
 git help *#获取命令的帮助信息
 git status#获取当前的状态，非常有用，因为git会提示接下来的能做的操作
 ```
+
 最后再补一个救命的命令吧，如果你不小心删错了东西，就用下面的命令，可以看到你之前操作的id，大部分情况下是可以恢复的，记住git几乎不会删除东西。  
+
 ```
 git reflog # 显示最近操作的commit id
 ```
-&nbsp;  
 
+&nbsp;  
 
